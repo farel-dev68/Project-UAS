@@ -44,9 +44,40 @@ class IoTNetwork {
     
         // Menghapus sensor berdasarkan ID dari linked list
         void removeSensor(int id) {
-            // TODO: Cari sensor dengan ID yang sesuai
-            // TODO: Hapus sensor dari linked list
+            // Jika linked list kosong
+            if (head == nullptr) {
+                cout << "Sensor tidak ditemukan. List kosong." << endl;
+                return;
+            }
+
+            // Jika node yang akan dihapus adalah head
+            if (head->id == id) {
+                SensorNode* temp = head;
+                head = head->next;
+                delete temp;
+                cout << "Sensor dengan ID " << id << " berhasil dihapus." << endl;
+                return;
+            }
+
+            // Cari node sebelum node yang akan dihapus
+            SensorNode* current = head;
+            while (current->next != nullptr && current->next->id != id) {
+                current = current->next;
+            }
+
+            // Jika sensor tidak ditemukan
+            if (current->next == nullptr) {
+                cout << "Sensor dengan ID " << id << " tidak ditemukan." << endl;
+                return;
+            }
+
+            // Hapus node yang sesuai
+            SensorNode* temp = current->next;
+            current->next = current->next->next;
+            delete temp;
+            cout << "Sensor dengan ID " << id << " berhasil dihapus." << endl;
         }
+
     
         // Menambahkan pengukuran ke sensor tertentu
         void addMeasurement(int sensorId, double value) {
