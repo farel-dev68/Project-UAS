@@ -81,8 +81,26 @@ class IoTNetwork {
     
         // Menambahkan pengukuran ke sensor tertentu
         void addMeasurement(int sensorId, double value) {
-            // TODO: Cari sensor berdasarkan ID
-            // TODO: Tambahkan pengukuran ke queue sensor tersebut
+            // Cari sensor berdasarkan ID
+            SensorNode* current = head;
+            while (current != nullptr) {
+                if (current->id == sensorId) {
+                    // Tambahkan pengukuran ke queue
+                    current->measurements.push(value);
+                    cout << "Pengukuran " << value << " ditambahkan ke sensor ID " << sensorId << "." << endl;
+
+                    // Jika jumlah pengukuran lebih dari 10, hapus yang tertua (optional)
+                    // if (current->measurements.size() > 10) {
+                    //     current->measurements.pop();
+                    // }
+
+                    return;
+                }
+                current = current->next;
+            }
+
+            // Jika sensor tidak ditemukan
+            cout << "Sensor dengan ID " << sensorId << " tidak ditemukan." << endl;
         }
     
         // Menghitung rata-rata 10 pengukuran terakhir untuk sensor tertentu
@@ -112,6 +130,9 @@ class IoTNetwork {
 int main() {
     IoTNetwork network;
     // Tambahkan kode pengujian Anda di sini
+    network.addSensor(1, "Ruang Kelas", "Suhu");
+    network.addMeasurement(1, 25.5);
+    network.addMeasurement(1, 26.0);
     network.removeSensor(1);
     return 0;
 }
