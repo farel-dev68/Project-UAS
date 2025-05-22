@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <queue>
+#include <iomanip>
 using namespace std;
 
 class IoTNetwork {
@@ -9,7 +11,7 @@ class IoTNetwork {
             string location; // Lokasi sensor
             string type;     // Tipe sensor
             SensorNode* next;    // Pointer ke node berikutnya
-            queue measurements; // Queue untuk menyimpan pengukuran
+            queue<double> measurements; // Queue untuk menyimpan pengukuran
             SensorNode(int i, string loc, string t) : id(i), location(loc), type(t), next(nullptr) {}
         };
         SensorNode* head; // Head dari linked list
@@ -19,26 +21,26 @@ class IoTNetwork {
     
         // Menambahkan sensor baru ke linked list
     void addSensor(int id, const string& location, const string& type) {
-    // Cek apakah ID sudah ada
-    SensorNode* current = head;
-    while (current != nullptr) {
-        if (current->id == id) {
-            cout << "Sensor dengan ID " << id << " sudah ada." << endl;
-            return;
+            // Cek apakah ID sudah ada
+            SensorNode* current = head;
+            while (current != nullptr) {
+                if (current->id == id) {
+                    cout << "Sensor dengan ID " << id << " sudah ada." << endl;
+                    return;
+                }
+                current = current->next;
+            }
+
+            // Buat node sensor baru
+            SensorNode* newNode = new SensorNode(id, location, type);
+
+            // Tambahkan node ke awal linked list
+            newNode->next = head;
+            head = newNode;
+
+            cout << "Sensor berhasil ditambahkan: ID=" << id << ", Lokasi=" << location << ", Tipe=" << type << endl;
         }
-        current = current->next;
-    }
-
-    // Buat node sensor baru
-    SensorNode* newNode = new SensorNode(id, location, type);
-
-    // Tambahkan node ke awal linked list
-    newNode->next = head;
-    head = newNode;
-
-    cout << "Sensor berhasil ditambahkan: ID=" << id << ", Lokasi=" << location << ", Tipe=" << type << endl;
-}
-        }
+        
     
         // Menghapus sensor berdasarkan ID dari linked list
         void removeSensor(int id) {
@@ -75,3 +77,9 @@ class IoTNetwork {
             // TODO: Bebaskan memori linked list
         }
     };
+
+int main() {
+    IoTNetwork network;
+    // Tambahkan kode pengujian Anda di sini
+    return 0;
+}
