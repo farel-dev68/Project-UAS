@@ -18,9 +18,26 @@ class IoTNetwork {
         IoTNetwork() : head(nullptr) {}
     
         // Menambahkan sensor baru ke linked list
-        void addSensor(int id, const string& location, const string& type) {
-            // TODO: Cek apakah ID sudah ada (unik)
-            // TODO: Tambahkan sensor baru ke linked list
+    void addSensor(int id, const string& location, const string& type) {
+    // Cek apakah ID sudah ada
+    SensorNode* current = head;
+    while (current != nullptr) {
+        if (current->id == id) {
+            cout << "Sensor dengan ID " << id << " sudah ada." << endl;
+            return;
+        }
+        current = current->next;
+    }
+
+    // Buat node sensor baru
+    SensorNode* newNode = new SensorNode(id, location, type);
+
+    // Tambahkan node ke awal linked list
+    newNode->next = head;
+    head = newNode;
+
+    cout << "Sensor berhasil ditambahkan: ID=" << id << ", Lokasi=" << location << ", Tipe=" << type << endl;
+}
         }
     
         // Menghapus sensor berdasarkan ID dari linked list
