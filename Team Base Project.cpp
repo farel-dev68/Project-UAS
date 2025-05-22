@@ -37,14 +37,21 @@ class IoTNetwork {
     head = newNode;
 
     cout << "Sensor berhasil ditambahkan: ID=" << id << ", Lokasi=" << location << ", Tipe=" << type << endl;
-}
+            }
         }
     
         // Menghapus sensor berdasarkan ID dari linked list
-        void removeSensor(int id) {
-            // TODO: Cari sensor dengan ID yang sesuai
-            // TODO: Hapus sensor dari linked list
-        }
+        void removeSensor(int sensors[], int &size, int index) {
+    if (index < 0 || index >= size) {
+        std::cout << "Index tidak valid!" << std::endl;
+        return;
+    }
+    for (int i = index; i < size - 1; i++) {
+        sensors[i] = sensors[i + 1];
+    }
+    size--;
+    std::cout << "Sensor berhasil dihapus." << std::endl;
+}
     
         // Menambahkan pengukuran ke sensor tertentu
         void addMeasurement(int sensorId, double value) {
