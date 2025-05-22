@@ -112,5 +112,6 @@ class IoTNetwork {
 int main() {
     IoTNetwork network;
     // Tambahkan kode pengujian Anda di sini
+    network.removeSensor(1);
     return 0;
 }
