@@ -112,9 +112,30 @@ class IoTNetwork {
         }
     
         // Mencari dan menampilkan sensor berdasarkan lokasi
-        void findSensorsByLocation(const string& location) {
-            // TODO: Telusuri linked list untuk mencari sensor dengan lokasi yang sesuai
-            // TODO: Tampilkan sensor yang ditemukan
+        void findSensors(const string& location) {
+            if (head == nullptr) {
+            cout << "Tidak ada sensor dalam jaringan." << endl;
+            return;
+            }
+
+            bool found = false;
+            cout << "\nSensor di lokasi " << location << ":" << endl;
+            cout << "ID  " << "Lokasi        " << "Tipe " << endl;
+
+            SensorNode* current = head;
+            while (current != nullptr) {
+            if (current->location == location) {
+                cout << current->id << "   "
+                 << current->location << "   "
+                 << current->type << endl;
+                found = true;
+            }
+            current = current->next;
+            }
+
+            if (!found) {
+            cout << "Tidak ditemukan sensor di lokasi " << location << endl;
+            }
         }
     
         // Menampilkan semua sensor dalam linked list
@@ -153,5 +174,6 @@ int main() {
     network.addMeasurement(2, 65.0);
     //network.removeSensor(1);
     network.displaySensors();
+    network.findSensors("Kamar Tidur");
     return 0;
 }
