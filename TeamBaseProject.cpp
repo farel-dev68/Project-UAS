@@ -38,7 +38,7 @@ class IoTNetwork {
             newNode->next = head;
             head = newNode;
 
-            cout << "Sensor berhasil ditambahkan: ID=" << id << ", Lokasi=" << location << ", Tipe=" << type << endl;
+            cout << "Sensor added: ID=" << id << ", Location=" << location << ", Type=" << type << endl;
         }
         
     
@@ -87,7 +87,7 @@ class IoTNetwork {
                 if (current->id == sensorId) {
                     // Tambahkan pengukuran ke queue
                     current->measurements.push(value);
-                    cout << "Pengukuran " << value << " ditambahkan ke sensor ID " << sensorId << "." << endl;
+                    cout << "Measurments " << value << " ditambahkan ke sensor ID " << sensorId << "." << endl;
 
                     // Jika jumlah pengukuran lebih dari 10, hapus yang tertua (optional)
                     // if (current->measurements.size() > 10) {
@@ -119,7 +119,22 @@ class IoTNetwork {
     
         // Menampilkan semua sensor dalam linked list
         void displaySensors() {
-            // TODO: Telusuri linked list dan tampilkan setiap sensor
+            if (head == nullptr) {
+            cout << "Tidak ada sensor dalam jaringan." << endl;
+            return;
+            }
+
+            cout << "\nDaftar Sensor:" << endl;
+            cout << "ID  " << "Lokasi        " << "Tipe " << endl;
+            
+            SensorNode* current = head;
+            while (current != nullptr) {
+            cout  <<current->id << "   "
+                  <<current->location << "   "
+                  <<current->type << endl;
+            current = current->next;
+            }
+            cout << endl;
         }
     
         ~IoTNetwork() {
@@ -130,9 +145,13 @@ class IoTNetwork {
 int main() {
     IoTNetwork network;
     // Tambahkan kode pengujian Anda di sini
-    network.addSensor(1, "Ruang Kelas", "Suhu");
+    network.addSensor(1, "Ruang Tamu", "Suhu");
+    network.addSensor(2, "Kamar Tidur", "Kelembapan");
     network.addMeasurement(1, 25.5);
     network.addMeasurement(1, 26.0);
-    network.removeSensor(1);
+    network.addMeasurement(2, 60.0);
+    network.addMeasurement(2, 65.0);
+    //network.removeSensor(1);
+    network.displaySensors();
     return 0;
 }
