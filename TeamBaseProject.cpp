@@ -120,14 +120,15 @@ class IoTNetwork {
 
             bool found = false;
             cout << "\nSensor di lokasi " << location << ":" << endl;
-            cout << "ID  " << "Lokasi        " << "Tipe " << endl;
+            cout << left << setw(5) << "ID" << setw(15) << "Lokasi" << setw(15) << "Tipe" << endl;
 
             SensorNode* current = head;
             while (current != nullptr) {
             if (current->location == location) {
-                cout << current->id << "   "
-                 << current->location << "   "
-                 << current->type << endl;
+                cout 
+                 << left << setw(5) << current->id
+                 << setw(15) << current->location
+                 << setw(15) << current->type << endl;
                 found = true;
             }
             current = current->next;
@@ -146,14 +147,14 @@ class IoTNetwork {
             }
 
             cout << "\nDaftar Sensor:" << endl;
-            cout << "ID  " << "Lokasi        " << "Tipe " << endl;
+            cout << left << setw(5) << "ID" << setw(15) << "Lokasi" << setw(15) << "Tipe" << endl;
             
             SensorNode* current = head;
             while (current != nullptr) {
-            cout  <<current->id << "   "
-                  <<current->location << "   "
-                  <<current->type << endl;
-            current = current->next;
+                cout << left << setw(5) << current->id 
+                     << setw(15) << current->location
+                     << setw(15) << current->type << endl;
+                current = current->next;
             }
             cout << endl;
         }
