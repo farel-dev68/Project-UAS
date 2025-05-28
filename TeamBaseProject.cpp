@@ -2,6 +2,7 @@
 #include <string>
 #include <queue>
 #include <iomanip>
+#include <stack>
 using namespace std;
 
 class IoTNetwork
@@ -15,6 +16,7 @@ private:
         SensorNode *next;           // Pointer ke node berikutnya
         queue<double> measurements; // Queue untuk menyimpan pengukuran
         SensorNode(int i, string loc, string t) : id(i), location(loc), type(t), next(nullptr) {}
+        stack<double> measurementHistory;
     };
     SensorNode *head; // Head dari linked list
 
@@ -103,7 +105,12 @@ public:
                 // Jika jumlah pengukuran lebih dari 10, hapus yang tertua (optional)
                 if (current->measurements.size() == 10)
                 {
-                    current->measurements.pop(); // Buang yang tertua jika sudah ada 5
+                    current->measurements.pop(); // Buang yang tertua jika sudah ada 10
+                }
+                // Simpan pengukuran terakhir ke stack sebelum ditimpa (jika ada)
+                if (!current->measurements.empty())
+                {
+                    current->measurementHistory.push(current->measurements.back());
                 }
 
                 return;
@@ -180,6 +187,36 @@ public:
         cout << endl;
     }
 
+    void undoLastMeasurement(int sensorId)
+    {
+        SensorNode *current = head;
+        while (current != nullptr)
+        {
+            if (current->id == sensorId)
+            {
+                if (current->measurementHistory.empty())
+                {
+                    cout << "Tidak ada histori pengukuran untuk sensor ID " << sensorId << "." << endl;
+                    return;
+                }
+
+                double lastValue = current->measurementHistory.top();
+                current->measurementHistory.pop();
+
+                // Hapus pengukuran terakhir dari queue
+                if (!current->measurements.empty())
+                    current->measurements.pop();
+
+                // Tambahkan kembali pengukuran sebelumnya dari stack
+                current->measurements.push(lastValue);
+                cout << "Undo dilakukan. Nilai dikembalikan ke " << lastValue << " untuk sensor ID " << sensorId << "." << endl;
+                return;
+            }
+            current = current->next;
+        }
+        cout << "Sensor dengan ID " << sensorId << " tidak ditemukan." << endl;
+    }
+
     ~IoTNetwork()
     {
         // TODO: Bebaskan memori linked list
@@ -199,5 +236,7 @@ int main()
     // network.removeSensor(1);
     network.displaySensors();
     network.findSensors("Kamar Tidur");
+    network.undoLastMeasurement(1);
+
     return 0;
 }
