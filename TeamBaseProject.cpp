@@ -3,6 +3,8 @@
 #include <queue>
 #include <iomanip>
 #include <stack>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 class IoTNetwork
@@ -125,9 +127,6 @@ public:
     // Menghitung rata-rata 10 pengukuran terakhir untuk sensor tertentu
     double getAverageMeasurement(int sensorId)
     {
-        // TODO: Cari sensor berdasarkan ID
-        // TODO: Ambil 10 pengukuran terakhir dari queue
-        // TODO: Hitung dan kembalikan rata-ratanya
         return 0.0; // Placeholder
     }
 
@@ -141,7 +140,7 @@ public:
         }
 
         bool found = false;
-        cout << "\nSensor di lokasi " << location << ":" << endl;
+        cout << "Sensor di lokasi " << location << ":" << endl;
         cout << left << setw(5) << "ID" << setw(15) << "Lokasi" << setw(15) << "Tipe" << endl;
 
         SensorNode *current = head;
@@ -187,6 +186,30 @@ public:
         cout << endl;
     }
 
+    // Menampilkan sensor dalam urutan berdasarkan lokasi
+    void sortAndDisplaySensorsByLocation()
+    {
+        vector<SensorNode *> sensors;
+        SensorNode *current = head;
+        while (current != nullptr)
+        {
+            sensors.push_back(current);
+            current = current->next;
+        }
+
+        sort(sensors.begin(), sensors.end(), [](SensorNode *a, SensorNode *b) {
+            return a->location < b->location;
+        });
+        cout << "Sensor diurutkan berdasarkan lokasi:" << endl;
+        cout << left << setw(5) << "ID" << setw(15) << "Lokasi" << setw(15) << "Tipe" << endl;
+        for (SensorNode *sensor : sensors)
+        {
+            cout << left << setw(5) << sensor->id
+                 << setw(15) << sensor->location
+                 << setw(15) << sensor->type << endl;
+        }
+    }
+
     void undoLastMeasurement(int sensorId)
     {
         SensorNode *current = head;
@@ -203,13 +226,11 @@ public:
                 double lastValue = current->measurementHistory.top();
                 current->measurementHistory.pop();
 
-                // Hapus pengukuran terakhir dari queue
                 if (!current->measurements.empty())
                     current->measurements.pop();
 
-                // Tambahkan kembali pengukuran sebelumnya dari stack
                 current->measurements.push(lastValue);
-                cout << "Undo dilakukan. Nilai dikembalikan ke " << lastValue << " untuk sensor ID " << sensorId << "." << endl;
+                cout << "\nUndo dilakukan. Nilai dikembalikan ke " << lastValue << " untuk sensor ID " << sensorId << "." << endl << endl;
                 return;
             }
             current = current->next;
@@ -226,17 +247,18 @@ public:
 int main()
 {
     IoTNetwork network;
-    // Tambahkan kode pengujian Anda di sini
     network.addSensor(1, "Ruang Tamu", "Suhu");
     network.addSensor(2, "Kamar Tidur", "Kelembapan");
+    network.addSensor(3, "Dapur", "Asap");
     network.addMeasurement(1, 25.5);
     network.addMeasurement(1, 26.0);
     network.addMeasurement(2, 60.0);
     network.addMeasurement(2, 65.0);
-    // network.removeSensor(1);
     network.displaySensors();
+    network.removeSensor (2);
     network.findSensors("Kamar Tidur");
     network.undoLastMeasurement(1);
+    network.sortAndDisplaySensorsByLocation();
 
     return 0;
 }
