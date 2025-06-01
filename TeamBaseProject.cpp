@@ -238,9 +238,16 @@ public:
         cout << "Sensor dengan ID " << sensorId << " tidak ditemukan." << endl;
     }
 
-    ~IoTNetwork()
-    {
-        // TODO: Bebaskan memori linked list
+    ~IoTNetwork() { // Destructor untuk membersihkan linked list
+        cout << "Membersihkan jaringan IoT..." << endl;
+        SensorNode *current = head;
+        while (current != nullptr)
+        {
+            SensorNode *temp = current;
+            current = current->next;
+            delete temp;
+        }
+        head = nullptr;
     }
 };
 
