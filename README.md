@@ -1,17 +1,17 @@
 # Project-UAS
 
-"Team Base Project Gaiso diwoco ambek compilerku, karena ada spasi"
+"Team Base Project Gaiso diwoco ambek compilerku, karena ada spasi"  
 
 
 ![alt text](Images/image.png)
 
-4 Juni 2:00 AM
+4 Juni 2:00 AM  
 
-perubahan:
--pemisahan class untuk IoTNetwork
--fungsi main sendiri
--sinkronisasi fungsi main dengan GUI
--testing testing GUI
+perubahan:  
+-pemisahan class untuk IoTNetwork  
+-fungsi main sendiri  
+-sinkronisasi fungsi main dengan GUI  
+-testing testing GUI  
 
 ![Gambar Pop up](Images/Popup%20window.png)
 
