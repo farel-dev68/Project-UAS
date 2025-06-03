@@ -81,7 +81,7 @@ background-color: black;
 </string>
     </property>
     <property name="text">
-     <string>Tambah Sensor</string>
+     <string>Hapus Sensor</string>
     </property>
     <property name="iconSize">
      <size>
@@ -99,67 +99,13 @@ background-color: black;
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineSensorID">
-    <property name="geometry">
-     <rect>
-      <x>120</x>
-      <y>110</y>
-      <width>113</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: white;
-background-color: black;
-</string>
-    </property>
-    <property name="text">
-     <string>ID Sensor</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineType">
-    <property name="geometry">
-     <rect>
-      <x>510</x>
-      <y>110</y>
-      <width>113</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: white;
-background-color: black;
-</string>
-    </property>
-    <property name="text">
-     <string>Tipe</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineLocation">
-    <property name="geometry">
-     <rect>
-      <x>330</x>
-      <y>110</y>
-      <width>113</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: white;
-background-color: black;
-</string>
-    </property>
-    <property name="text">
-     <string>Lokasi</string>
-    </property>
-   </widget>
    <widget class="QTextBrowser" name="textOutput">
     <property name="geometry">
      <rect>
-      <x>220</x>
-      <y>180</y>
-      <width>331</width>
-      <height>201</height>
+      <x>190</x>
+      <y>100</y>
+      <width>391</width>
+      <height>281</height>
      </rect>
     </property>
     <property name="styleSheet">

@@ -11,7 +11,6 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
@@ -27,9 +26,6 @@ public:
     QWidget *centralwidget;
     QPushButton *btnAddSensor;
     QPushButton *btnRemoveSensor;
-    QLineEdit *lineSensorID;
-    QLineEdit *lineType;
-    QLineEdit *lineLocation;
     QTextBrowser *textOutput;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -66,27 +62,9 @@ public:
         btnRemoveSensor->setIconSize(QSize(16, 16));
         btnRemoveSensor->setAutoDefault(false);
         btnRemoveSensor->setFlat(false);
-        lineSensorID = new QLineEdit(centralwidget);
-        lineSensorID->setObjectName("lineSensorID");
-        lineSensorID->setGeometry(QRect(120, 110, 113, 24));
-        lineSensorID->setStyleSheet(QString::fromUtf8("color: white;\n"
-"background-color: black;\n"
-""));
-        lineType = new QLineEdit(centralwidget);
-        lineType->setObjectName("lineType");
-        lineType->setGeometry(QRect(510, 110, 113, 24));
-        lineType->setStyleSheet(QString::fromUtf8("color: white;\n"
-"background-color: black;\n"
-""));
-        lineLocation = new QLineEdit(centralwidget);
-        lineLocation->setObjectName("lineLocation");
-        lineLocation->setGeometry(QRect(330, 110, 113, 24));
-        lineLocation->setStyleSheet(QString::fromUtf8("color: white;\n"
-"background-color: black;\n"
-""));
         textOutput = new QTextBrowser(centralwidget);
         textOutput->setObjectName("textOutput");
-        textOutput->setGeometry(QRect(220, 180, 331, 201));
+        textOutput->setGeometry(QRect(190, 100, 391, 281));
         textOutput->setStyleSheet(QString::fromUtf8("color: white;\n"
 "background-color: black;"));
         MainWindow->setCentralWidget(centralwidget);
@@ -111,10 +89,7 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         btnAddSensor->setText(QCoreApplication::translate("MainWindow", "Tambah Sensor", nullptr));
-        btnRemoveSensor->setText(QCoreApplication::translate("MainWindow", "Tambah Sensor", nullptr));
-        lineSensorID->setText(QCoreApplication::translate("MainWindow", "ID Sensor", nullptr));
-        lineType->setText(QCoreApplication::translate("MainWindow", "Tipe", nullptr));
-        lineLocation->setText(QCoreApplication::translate("MainWindow", "Lokasi", nullptr));
+        btnRemoveSensor->setText(QCoreApplication::translate("MainWindow", "Hapus Sensor", nullptr));
     } // retranslateUi
 
 };
