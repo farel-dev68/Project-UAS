@@ -17,11 +17,11 @@
    <string notr="true">background-color: #87CEFA;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="btnAddSensor">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>340</y>
+      <x>100</x>
+      <y>480</y>
       <width>141</width>
       <height>51</height>
      </rect>
@@ -56,6 +56,115 @@ background-color: black;
     </property>
     <property name="flat">
      <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnRemoveSensor">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>480</y>
+      <width>141</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <italic>false</italic>
+     </font>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: white;
+background-color: black;
+</string>
+    </property>
+    <property name="text">
+     <string>Tambah Sensor</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>16</width>
+      <height>16</height>
+     </size>
+    </property>
+    <property name="autoDefault">
+     <bool>false</bool>
+    </property>
+    <property name="default">
+     <bool>true</bool>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineSensorID">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>110</y>
+      <width>113</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: white;
+background-color: black;
+</string>
+    </property>
+    <property name="text">
+     <string>ID Sensor</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineType">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>110</y>
+      <width>113</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: white;
+background-color: black;
+</string>
+    </property>
+    <property name="text">
+     <string>Tipe</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineLocation">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>110</y>
+      <width>113</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: white;
+background-color: black;
+</string>
+    </property>
+    <property name="text">
+     <string>Lokasi</string>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="textOutput">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>180</y>
+      <width>331</width>
+      <height>201</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: white;
+background-color: black;</string>
     </property>
    </widget>
   </widget>

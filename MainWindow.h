@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "IoTNetwork.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -15,10 +16,11 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();  // <-- Ini harus di dalam class!
-
+    void on_btnAddSensor_clicked();  // <-- Ini harus di dalam class!
+    void on_btnRemoveSensor_clicked();
 private:
     Ui::MainWindow *ui;
+    IoTNetwork network;
 };
 
 #endif // MAINWINDOW_H

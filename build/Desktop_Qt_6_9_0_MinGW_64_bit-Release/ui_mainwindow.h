@@ -23,7 +23,8 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QPushButton *pushButton;
+    QPushButton *btnAddSensor;
+    QPushButton *btnRemoveSensor;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -35,19 +36,30 @@ public:
         MainWindow->setStyleSheet(QString::fromUtf8("background-color: #87CEFA;"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
-        pushButton = new QPushButton(centralwidget);
-        pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(120, 340, 141, 51));
+        btnAddSensor = new QPushButton(centralwidget);
+        btnAddSensor->setObjectName("btnAddSensor");
+        btnAddSensor->setGeometry(QRect(100, 480, 141, 51));
         QFont font;
         font.setItalic(false);
-        pushButton->setFont(font);
-        pushButton->setAutoFillBackground(false);
-        pushButton->setStyleSheet(QString::fromUtf8("color: white;\n"
+        btnAddSensor->setFont(font);
+        btnAddSensor->setAutoFillBackground(false);
+        btnAddSensor->setStyleSheet(QString::fromUtf8("color: white;\n"
 "background-color: black;\n"
 ""));
-        pushButton->setIconSize(QSize(16, 16));
-        pushButton->setAutoDefault(false);
-        pushButton->setFlat(false);
+        btnAddSensor->setIconSize(QSize(16, 16));
+        btnAddSensor->setAutoDefault(false);
+        btnAddSensor->setFlat(false);
+        btnRemoveSensor = new QPushButton(centralwidget);
+        btnRemoveSensor->setObjectName("btnRemoveSensor");
+        btnRemoveSensor->setGeometry(QRect(330, 480, 141, 51));
+        btnRemoveSensor->setFont(font);
+        btnRemoveSensor->setAutoFillBackground(false);
+        btnRemoveSensor->setStyleSheet(QString::fromUtf8("color: white;\n"
+"background-color: black;\n"
+""));
+        btnRemoveSensor->setIconSize(QSize(16, 16));
+        btnRemoveSensor->setAutoDefault(false);
+        btnRemoveSensor->setFlat(false);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -59,7 +71,8 @@ public:
 
         retranslateUi(MainWindow);
 
-        pushButton->setDefault(true);
+        btnAddSensor->setDefault(true);
+        btnRemoveSensor->setDefault(true);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -68,7 +81,8 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "Tambah Sensor", nullptr));
+        btnAddSensor->setText(QCoreApplication::translate("MainWindow", "Tambah Sensor", nullptr));
+        btnRemoveSensor->setText(QCoreApplication::translate("MainWindow", "Tambah Sensor", nullptr));
     } // retranslateUi
 
 };
