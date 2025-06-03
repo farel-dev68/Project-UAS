@@ -5,6 +5,11 @@
 #include <stack>
 #include <vector>
 #include <algorithm>
+#include <QApplication>
+#include <QMainWindow>
+#include "MainWindow.h"
+
+
 using namespace std;
 
 class IoTNetwork
@@ -251,8 +256,7 @@ public:
     }
 };
 
-int main()
-{
+int main(int argc, char *argv[]) {
     IoTNetwork network;
     network.addSensor(1, "Ruang Tamu", "Suhu");
     network.addSensor(2, "Kamar Tidur", "Kelembapan");
@@ -267,5 +271,19 @@ int main()
     network.undoLastMeasurement(1);
     network.sortAndDisplaySensorsByLocation();
 
-    return 0;
+    // return 0;
+    network.removeSensor(1);
+    QApplication app(argc, argv);
+
+    // QMainWindow window;
+    // window.setStyleSheet("background-color: lightblue;");
+    // window.resize(1280, 720);
+    // window.show();
+    // int x;   // Buat objek aplikasi
+
+    MainWindow window;               // Buat objek MainWindow (kelas kamu)
+    window.show();
+    // pushButton->setStyleSheet("background-color: yellow; color: red;");
+    return app.exec();
+    // return 0;
 }
