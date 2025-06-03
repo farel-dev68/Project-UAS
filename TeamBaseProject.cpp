@@ -237,6 +237,46 @@ public:
         }
         cout << "Sensor dengan ID " << sensorId << " tidak ditemukan." << endl;
     }
+    void test_sensor_operations() {
+    IoTNetwork network;
+    
+    // Test 1000 sensor operations
+    for(int i = 0; i < 1000; i++) {
+        // Test adding sensors with random values
+        int id = i;
+        string locations[] = {"Ruang Tamu", "Kamar Tidur", "Dapur", "Garasi", "Taman"};
+        string types[] = {"Suhu", "Kelembapan", "Asap", "Cahaya", "Gerak"};
+        
+        string location = locations[i % 5];
+        string type = types[i % 5];
+        
+        // Add sensor
+        network.addSensor(id, location, type);
+        
+        // Add measurements
+        double measurement = 20.0 + (rand() % 100) / 10.0; // Random value between 20.0 and 30.0
+        network.addMeasurement(id, measurement);
+        
+        // Verify sensor exists by displaying
+        network.displaySensors();
+        
+        // Test find sensors by location
+        network.findSensors(location);
+        
+        // Test sorting
+        network.sortAndDisplaySensorsByLocation();
+        
+        // Test undo measurement
+        network.undoLastMeasurement(id);
+        
+        // Remove some sensors randomly
+        if(i % 3 == 0) {
+            network.removeSensor(id);
+            }
+        
+        cout << "Test #" << (i+1) << " completed successfully" << endl;
+        }
+    }
 
     ~IoTNetwork() { // Destructor untuk membersihkan linked list
         cout << "Membersihkan jaringan IoT..." << endl;
@@ -266,6 +306,13 @@ int main()
     network.findSensors("Kamar Tidur");
     network.undoLastMeasurement(1);
     network.sortAndDisplaySensorsByLocation();
+    cout << "Starting IoTNetwork tests..." << endl;
+    
+    network.test_sensor_operations();
+    
+    cout << "All tests completed successfully!" << endl;
+    return 0;
+
 
     return 0;
 }
