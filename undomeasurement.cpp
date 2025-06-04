@@ -12,3 +12,7 @@ UndoMeasurement::~UndoMeasurement()
 {
     delete ui;
 }
+
+int UndoMeasurement::getSensorID() const {
+    return ui->lineSensorID->text().toInt();
+}

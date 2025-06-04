@@ -43,7 +43,7 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         "",
         "on_btnRemoveSensor_clicked",
         "on_btnAddMeasurement_clicked",
-        "on_btnDisplaySensor_clicker",
+        "on_btnDisplaySensor_clicked",
         "on_btnFindSensors_clicked",
         "on_btnSortnDisplay_clicked",
         "on_btnUndoMeasurement_clicked",
@@ -58,7 +58,7 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_btnAddMeasurement_clicked'
         QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_btnDisplaySensor_clicker'
+        // Slot 'on_btnDisplaySensor_clicked'
         QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_btnFindSensors_clicked'
         QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
@@ -96,7 +96,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 0: _t->on_btnAddSensor_clicked(); break;
         case 1: _t->on_btnRemoveSensor_clicked(); break;
         case 2: _t->on_btnAddMeasurement_clicked(); break;
-        case 3: _t->on_btnDisplaySensor_clicker(); break;
+        case 3: _t->on_btnDisplaySensor_clicked(); break;
         case 4: _t->on_btnFindSensors_clicked(); break;
         case 5: _t->on_btnSortnDisplay_clicked(); break;
         case 6: _t->on_btnUndoMeasurement_clicked(); break;

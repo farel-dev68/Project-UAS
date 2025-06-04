@@ -45,9 +45,10 @@ void MainWindow::on_btnAddMeasurement_clicked()
         ui->textOutput->append(QString::fromStdString(result));
     }
 }
-void MainWindow::on_btnDisplaySensor_clicker()
+void MainWindow::on_btnDisplaySensor_clicked()
 {
-
+    std::string result = network.displaySensors();
+    ui->textOutput->append(QString::fromStdString(result));
 }
 void MainWindow::on_btnFindSensors_clicked()
 {
@@ -55,11 +56,18 @@ void MainWindow::on_btnFindSensors_clicked()
 }
 void MainWindow::on_btnSortnDisplay_clicked()
 {
-
+    std::string result = network.sortAndDisplaySensorsByLocation();
+    ui->textOutput->append(QString::fromStdString(result));
 }
 void MainWindow::on_btnUndoMeasurement_clicked()
 {
+    AddMeasurement dialog(this);
+    if (dialog.exec() == QDialog::Accepted) {
+        int id = dialog.getSensorID();
 
+        std::string result = network.undoLastMeasurement(id);
+        ui->textOutput->append(QString::fromStdString(result));
+    }
 }
 void MainWindow::on_btnGetAverage_clicked()
 {

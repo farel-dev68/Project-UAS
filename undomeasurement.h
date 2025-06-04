@@ -15,6 +15,7 @@ public:
     explicit UndoMeasurement(QWidget *parent = nullptr);
     ~UndoMeasurement();
 
+    int getSensorID() const;
 private:
     Ui::UndoMeasurement *ui;
 };

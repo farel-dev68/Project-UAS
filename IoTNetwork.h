@@ -11,12 +11,13 @@ public:
     IoTNetwork();
     string addSensor(int id, const string &location, const string &type);
     string addMeasurement(int sensorId, double value);
-    void removeSensor(int id);
-    void findSensors(const string &location);
-    void displaySensors();
-    void sortAndDisplaySensorsByLocation();
-    void undoLastMeasurement(int sensorId);
-    double getAverageMeasurement(int sensorId);
+    string removeSensor(int id);
+    string findSensors(const string &location);
+    string displaySensors();
+    string sortAndDisplaySensorsByLocation();
+    string undoLastMeasurement(int sensorId);
+    string getAverageMeasurement(int sensorId);
+    string clearNetwork();
     ~IoTNetwork();
 private:
     struct SensorNode {

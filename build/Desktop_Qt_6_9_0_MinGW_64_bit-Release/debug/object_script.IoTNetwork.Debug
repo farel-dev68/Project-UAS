@@ -1,0 +1,16 @@
+debug/TeamBaseProject.o
+debug/IoTNetwork.o
+debug/MainWindow.o
+debug/addmeasurement.o
+debug/addsensordialog.o
+debug/findsensors.o
+debug/getaverage.o
+debug/removesensor.o
+debug/undomeasurement.o
+debug/moc_MainWindow.o
+debug/moc_addmeasurement.o
+debug/moc_addsensordialog.o
+debug/moc_findsensors.o
+debug/moc_getaverage.o
+debug/moc_removesensor.o
+debug/moc_undomeasurement.o

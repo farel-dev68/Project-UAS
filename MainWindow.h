@@ -20,7 +20,7 @@ private slots:
     void on_btnAddSensor_clicked();
     void on_btnRemoveSensor_clicked();
     void on_btnAddMeasurement_clicked();
-    void on_btnDisplaySensor_clicker();
+    void on_btnDisplaySensor_clicked();
     void on_btnFindSensors_clicked();
     void on_btnSortnDisplay_clicked();
     void on_btnUndoMeasurement_clicked();
