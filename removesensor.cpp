@@ -6,9 +6,15 @@ RemoveSensor::RemoveSensor(QWidget *parent)
     , ui(new Ui::RemoveSensor)
 {
     ui->setupUi(this);
+
+    connect(ui->btnSubmit, &QPushButton::clicked, this, &QDialog::accept);
 }
 
 RemoveSensor::~RemoveSensor()
 {
     delete ui;
+}
+
+int RemoveSensor::getSensorID() const {
+    return ui->lineSensorID->text().toInt();
 }

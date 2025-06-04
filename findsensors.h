@@ -15,6 +15,7 @@ public:
     explicit FindSensors(QWidget *parent = nullptr);
     ~FindSensors();
 
+    QString getLocation() const;
 private:
     Ui::FindSensors *ui;
 };

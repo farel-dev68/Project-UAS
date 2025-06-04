@@ -3,6 +3,7 @@ release/IoTNetwork.o
 release/MainWindow.o
 release/addmeasurement.o
 release/addsensordialog.o
+release/displaymeasurement.o
 release/findsensors.o
 release/getaverage.o
 release/removesensor.o
@@ -11,6 +12,7 @@ release/undomeasurement.o
 release/moc_MainWindow.o
 release/moc_addmeasurement.o
 release/moc_addsensordialog.o
+release/moc_displaymeasurement.o
 release/moc_findsensors.o
 release/moc_getaverage.o
 release/moc_removesensor.o

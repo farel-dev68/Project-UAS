@@ -322,16 +322,61 @@ string IoTNetwork::undoLastMeasurement(int sensorId)
     return msg;
 }
 
-void IoTNetwork::loadRandomSampleData(int count) {
+// Tampilkan semua pengukuran untuk sensor tertentu
+string IoTNetwork::displayMeasurement(int sensorId)
+{
+    SensorNode *current = head;
+    while (current != nullptr)
+    {
+        if (current->id == sensorId)
+        {
+            if (current->measurements.empty())
+            {
+                string msg = "Sensor ID " + to_string(sensorId) + " tidak memiliki pengukuran.";
+                cout << msg << endl;
+                return msg;
+            }
+
+            ostringstream oss;
+            oss << "Pengukuran untuk Sensor ID " << sensorId << ":\n";
+            oss << fixed << setprecision(2);
+
+            queue<double> tempQueue = current->measurements;
+            int index = 1;
+            while (!tempQueue.empty())
+            {
+                oss << "  " << index << ". " << tempQueue.front() << "\n";
+                tempQueue.pop();
+                index++;
+            }
+
+            string msg = oss.str();
+            cout << msg << endl;
+            return msg;
+        }
+        current = current->next;
+    }
+
+    string msg = "Sensor dengan ID " + to_string(sensorId) + " tidak ditemukan.";
+    cout << msg << endl;
+    return msg;
+}
+
+
+string IoTNetwork::loadRandomSampleData(int count) {
     srand(static_cast<unsigned>(time(nullptr)));
+    ostringstream oss;
 
     for (int i = 0; i < count; ++i) {
         int id = 100 + i;
         string location = LOCATIONS[rand() % (sizeof(LOCATIONS) / sizeof(string))];
         string type = SENSOR_TYPES[rand() % (sizeof(SENSOR_TYPES) / sizeof(string))];
 
-        addSensor(id, location, type);
+        string result = addSensor(id, location, type);
+        oss << "  - " << result << "\n";
     }
+    string msg = oss.str();
+    return msg;
 }
 
 string IoTNetwork::loadRandomMeasurementsToAll(int jumlahPengukuranPerSensor)
@@ -368,7 +413,13 @@ string IoTNetwork::loadRandomMeasurementsToAll(int jumlahPengukuranPerSensor)
     return msg;
 }
 
-
+string IoTNetwork::testCase() {
+    string msg = "tambah 1000 sensor\n";
+    for (int i = 0; i < 1000; i++) {
+        msg += addSensor(i, "Ruang Tamu", "Suhu") + "\n";
+    }
+    return msg;
+}
 
 // Destructor helper
 string IoTNetwork::clearNetwork()

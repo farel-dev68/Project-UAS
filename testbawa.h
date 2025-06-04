@@ -1,3 +1,5 @@
+// testbawa.h
+
 #ifndef TESTBAWA_H
 #define TESTBAWA_H
 
@@ -15,6 +17,9 @@ public:
     explicit TestBawa(QWidget *parent = nullptr);
     ~TestBawa();
 
+    int getJumlah() const;
+    QString getMode() const;
+
 private slots:
     void on_btn1000_clicked();
     void on_btnMeasurement_clicked();
@@ -22,6 +27,8 @@ private slots:
 
 private:
     Ui::TestBawa *ui;
+    int jumlah = 0;
+    QString mode; // "1000", "measurement", atau "sample"
 };
 
 #endif // TESTBAWA_H

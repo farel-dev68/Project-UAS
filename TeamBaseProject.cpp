@@ -28,9 +28,6 @@ void testCase() {
 
 int main(int argc, char *argv[]) {
 
-
-
-
     QApplication app(argc, argv);
     MainWindow window(network);  // Kirim referensi ke konstruktor
     window.show();

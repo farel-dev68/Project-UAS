@@ -8,6 +8,7 @@ SOURCES += TeamBaseProject.cpp \
            MainWindow.cpp \
            addmeasurement.cpp \
            addsensordialog.cpp \
+           displaymeasurement.cpp \
            findsensors.cpp \
            getaverage.cpp \
            removesensor.cpp \
@@ -18,6 +19,7 @@ HEADERS += MainWindow.h \
     IoTNetwork.h \
     addmeasurement.h \
     addsensordialog.h \
+    displaymeasurement.h \
     findsensors.h \
     getaverage.h \
     removesensor.h \
@@ -27,6 +29,7 @@ HEADERS += MainWindow.h \
 FORMS += mainwindow.ui \
     addmeasurement.ui \
     addsensordialog.ui \
+    displaymeasurement.ui \
     findsensors.ui \
     getaverage.ui \
     removesensor.ui \

@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'getaverage.ui'
+** Form generated from reading UI file 'displaymeasurement.ui'
 **
 ** Created by: Qt User Interface Compiler version 6.9.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_GETAVERAGE_H
-#define UI_GETAVERAGE_H
+#ifndef UI_DISPLAYMEASUREMENT_H
+#define UI_DISPLAYMEASUREMENT_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -18,45 +18,45 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_GetAverage
+class Ui_DisplayMeasurement
 {
 public:
+    QLineEdit *lineSensorID;
     QPushButton *btnSubmit;
     QTextBrowser *textBrowser;
-    QLineEdit *lineSensorID;
 
-    void setupUi(QDialog *GetAverage)
+    void setupUi(QDialog *DisplayMeasurement)
     {
-        if (GetAverage->objectName().isEmpty())
-            GetAverage->setObjectName("GetAverage");
-        GetAverage->resize(320, 240);
-        GetAverage->setStyleSheet(QString::fromUtf8("background-color: #0078D7;"));
-        btnSubmit = new QPushButton(GetAverage);
-        btnSubmit->setObjectName("btnSubmit");
-        btnSubmit->setGeometry(QRect(120, 170, 80, 24));
-        btnSubmit->setStyleSheet(QString::fromUtf8("color: white;\n"
-"background-color: black;"));
-        textBrowser = new QTextBrowser(GetAverage);
-        textBrowser->setObjectName("textBrowser");
-        textBrowser->setGeometry(QRect(40, 60, 111, 31));
-        textBrowser->setStyleSheet(QString::fromUtf8("color: white;\n"
-"background-color: black;"));
-        lineSensorID = new QLineEdit(GetAverage);
+        if (DisplayMeasurement->objectName().isEmpty())
+            DisplayMeasurement->setObjectName("DisplayMeasurement");
+        DisplayMeasurement->resize(320, 240);
+        DisplayMeasurement->setStyleSheet(QString::fromUtf8("background-color: #0078D7;"));
+        lineSensorID = new QLineEdit(DisplayMeasurement);
         lineSensorID->setObjectName("lineSensorID");
         lineSensorID->setGeometry(QRect(170, 60, 113, 31));
         lineSensorID->setStyleSheet(QString::fromUtf8("color: white;\n"
 "background-color: black;"));
+        btnSubmit = new QPushButton(DisplayMeasurement);
+        btnSubmit->setObjectName("btnSubmit");
+        btnSubmit->setGeometry(QRect(120, 170, 80, 24));
+        btnSubmit->setStyleSheet(QString::fromUtf8("color: white;\n"
+"background-color: black;"));
+        textBrowser = new QTextBrowser(DisplayMeasurement);
+        textBrowser->setObjectName("textBrowser");
+        textBrowser->setGeometry(QRect(40, 60, 111, 31));
+        textBrowser->setStyleSheet(QString::fromUtf8("color: white;\n"
+"background-color: black;"));
 
-        retranslateUi(GetAverage);
+        retranslateUi(DisplayMeasurement);
 
-        QMetaObject::connectSlotsByName(GetAverage);
+        QMetaObject::connectSlotsByName(DisplayMeasurement);
     } // setupUi
 
-    void retranslateUi(QDialog *GetAverage)
+    void retranslateUi(QDialog *DisplayMeasurement)
     {
-        GetAverage->setWindowTitle(QCoreApplication::translate("GetAverage", "Dialog", nullptr));
-        btnSubmit->setText(QCoreApplication::translate("GetAverage", "SUBMIT", nullptr));
-        textBrowser->setHtml(QCoreApplication::translate("GetAverage", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        DisplayMeasurement->setWindowTitle(QCoreApplication::translate("DisplayMeasurement", "Dialog", nullptr));
+        btnSubmit->setText(QCoreApplication::translate("DisplayMeasurement", "SUBMIT", nullptr));
+        textBrowser->setHtml(QCoreApplication::translate("DisplayMeasurement", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "hr { height: 1px; border-width: 0; }\n"
@@ -69,9 +69,9 @@ public:
 };
 
 namespace Ui {
-    class GetAverage: public Ui_GetAverage {};
+    class DisplayMeasurement: public Ui_DisplayMeasurement {};
 } // namespace Ui
 
 QT_END_NAMESPACE
 
-#endif // UI_GETAVERAGE_H
+#endif // UI_DISPLAYMEASUREMENT_H

@@ -6,6 +6,11 @@ GetAverage::GetAverage(QWidget *parent)
     , ui(new Ui::GetAverage)
 {
     ui->setupUi(this);
+    connect(ui->btnSubmit, &QPushButton::clicked, this, &QDialog::accept);
+}
+
+int GetAverage::getSensorID() const {
+    return ui->lineSensorID->text().toInt();
 }
 
 GetAverage::~GetAverage()

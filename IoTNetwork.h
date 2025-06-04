@@ -17,8 +17,10 @@ public:
     string sortAndDisplaySensorsByLocation();
     string undoLastMeasurement(int sensorId);
     string getAverageMeasurement(int sensorId);
-    void loadRandomSampleData(int count);
+    string displayMeasurement(int sensorId);
+    string loadRandomSampleData(int count);
     string loadRandomMeasurementsToAll(int jumlahPengukuranPerSensor);
+    string testCase();
     string clearNetwork();
     ~IoTNetwork();
 private:

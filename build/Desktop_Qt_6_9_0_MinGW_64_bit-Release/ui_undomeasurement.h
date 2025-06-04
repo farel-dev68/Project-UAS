@@ -24,6 +24,7 @@ public:
     QTextBrowser *textBrowser;
     QPushButton *btnSubmit;
     QLineEdit *lineSensorID;
+    QLineEdit *lineSensorID_2;
 
     void setupUi(QDialog *UndoMeasurement)
     {
@@ -45,6 +46,11 @@ public:
         lineSensorID->setObjectName("lineSensorID");
         lineSensorID->setGeometry(QRect(170, 70, 113, 31));
         lineSensorID->setStyleSheet(QString::fromUtf8("color: white;\n"
+"background-color: black;"));
+        lineSensorID_2 = new QLineEdit(UndoMeasurement);
+        lineSensorID_2->setObjectName("lineSensorID_2");
+        lineSensorID_2->setGeometry(QRect(350, 70, 113, 31));
+        lineSensorID_2->setStyleSheet(QString::fromUtf8("color: white;\n"
 "background-color: black;"));
 
         retranslateUi(UndoMeasurement);

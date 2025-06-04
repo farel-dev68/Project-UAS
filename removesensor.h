@@ -15,6 +15,7 @@ public:
     explicit RemoveSensor(QWidget *parent = nullptr);
     ~RemoveSensor();
 
+    int getSensorID() const;
 private:
     Ui::RemoveSensor *ui;
 };

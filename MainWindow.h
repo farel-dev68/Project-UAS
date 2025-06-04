@@ -25,8 +25,9 @@ private slots:
     void on_btnSortnDisplay_clicked();
     void on_btnUndoMeasurement_clicked();
     void on_btnGetAverage_clicked();
-    void on_btnTestSensor_clicked();
+    void on_btnClear_clicked();
     void on_btnTestBawa_clicked();
+    void on_btnDisplayMeasurement_clicked();
 
 private:
     Ui::MainWindow *ui;

@@ -10,11 +10,13 @@ UndoMeasurement::UndoMeasurement(QWidget *parent)
     connect(ui->btnSubmit, &QPushButton::clicked, this, &QDialog::accept);
 }
 
+int UndoMeasurement::getSensorID() const {
+    return ui->lineSensorID->text().toInt();
+}
+
 UndoMeasurement::~UndoMeasurement()
 {
     delete ui;
 }
 
-int UndoMeasurement::getSensorID() const {
-    return ui->lineSensorID->text().toInt();
-}
+
