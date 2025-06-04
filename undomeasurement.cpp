@@ -6,6 +6,8 @@ UndoMeasurement::UndoMeasurement(QWidget *parent)
     , ui(new Ui::UndoMeasurement)
 {
     ui->setupUi(this);
+
+    connect(ui->btnSubmit, &QPushButton::clicked, this, &QDialog::accept);
 }
 
 UndoMeasurement::~UndoMeasurement()

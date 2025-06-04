@@ -11,6 +11,7 @@ SOURCES += TeamBaseProject.cpp \
            findsensors.cpp \
            getaverage.cpp \
            removesensor.cpp \
+           testbawa.cpp \
            undomeasurement.cpp
 
 HEADERS += MainWindow.h \
@@ -20,6 +21,7 @@ HEADERS += MainWindow.h \
     findsensors.h \
     getaverage.h \
     removesensor.h \
+    testbawa.h \
     undomeasurement.h
 
 FORMS += mainwindow.ui \
@@ -28,4 +30,5 @@ FORMS += mainwindow.ui \
     findsensors.ui \
     getaverage.ui \
     removesensor.ui \
+    testbawa.ui \
     undomeasurement.ui

@@ -36,6 +36,7 @@ public:
     QPushButton *btnTestSensor;
     QTextBrowser *textOutput_2;
     QTextBrowser *textOutput_3;
+    QPushButton *btnTestBawa;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -163,6 +164,17 @@ public:
         textOutput_3->setGeometry(QRect(580, 20, 221, 41));
         textOutput_3->setStyleSheet(QString::fromUtf8("color: white;\n"
 "background-color: black;"));
+        btnTestBawa = new QPushButton(centralwidget);
+        btnTestBawa->setObjectName("btnTestBawa");
+        btnTestBawa->setGeometry(QRect(610, 250, 151, 51));
+        btnTestBawa->setFont(font);
+        btnTestBawa->setAutoFillBackground(false);
+        btnTestBawa->setStyleSheet(QString::fromUtf8("color: white;\n"
+"background-color: black;\n"
+""));
+        btnTestBawa->setIconSize(QSize(16, 16));
+        btnTestBawa->setAutoDefault(false);
+        btnTestBawa->setFlat(false);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -183,6 +195,7 @@ public:
         btnUndoMeasurement->setDefault(true);
         btnSortnDisplay->setDefault(true);
         btnTestSensor->setDefault(true);
+        btnTestBawa->setDefault(true);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -217,6 +230,7 @@ public:
 "li.checked::marker { content: \"\\2612\"; }\n"
 "</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
 "<h2 style=\" margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:x-large; font-weight:700;\">Pemantauan sensor IOT</span></h2></body></html>", nullptr));
+        btnTestBawa->setText(QCoreApplication::translate("MainWindow", "Pengujian bawaan", nullptr));
     } // retranslateUi
 
 };

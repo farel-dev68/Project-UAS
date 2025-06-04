@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "AddSensorDialog.h"
 #include "addmeasurement.h"
+#include "undomeasurement.h"
 #include <QMessageBox>
 
 // Konstruktor: simpan referensi ke IoTNetwork
@@ -61,7 +62,7 @@ void MainWindow::on_btnSortnDisplay_clicked()
 }
 void MainWindow::on_btnUndoMeasurement_clicked()
 {
-    AddMeasurement dialog(this);
+    UndoMeasurement dialog(this);
     if (dialog.exec() == QDialog::Accepted) {
         int id = dialog.getSensorID();
 
@@ -74,6 +75,10 @@ void MainWindow::on_btnGetAverage_clicked()
 
 }
 void MainWindow::on_btnTestSensor_clicked()
+{
+
+}
+void MainWindow::on_btnTestBawa_clicked()
 {
 
 }

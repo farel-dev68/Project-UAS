@@ -7,11 +7,32 @@
 #include <algorithm>
 #include <QString>
 #include <sstream>
+#include <cstdlib>  // rand()
+#include <ctime>    // time()
+
 
 using namespace std;
 
 // Konstruktor
 IoTNetwork::IoTNetwork() : head(nullptr) {}
+
+const std::string LOCATIONS[] = {
+    "Ruang Lab A", "Ruang Lab B", "Ruang Server", "Ruang Kelas 1", "Ruang Kelas 2",
+    "Gudang", "Lobby", "Lorong Utama", "Atap Gedung", "Basement",
+    "Taman Depan", "Taman Belakang", "Parkiran Timur", "Parkiran Barat",
+    "Toilet Pria", "Toilet Wanita", "Lift", "Tangga Darurat", "Ruang Admin",
+    "Ruang Dosen", "Ruang Mahasiswa", "Ruang Meeting", "Kafetaria", "Kantin",
+    "Pos Satpam", "Gerbang Utama", "Gudang IT", "Panel Listrik", "Ruang CCTV",
+    "Ruang Pendingin", "Ruang AC Sentral"
+};
+
+const std::string SENSOR_TYPES[] = {
+    "Suhu", "Kelembaban", "Gerak", "Cahaya", "Gas", "Asap", "Tekanan", "Getaran",
+    "Pintu", "Jarak", "Ketinggian", "Arus", "Tegangan", "Suara", "CO2", "PM2.5",
+    "Amonia", "Kebocoran Air", "RFID", "Magnet", "Infrared", "Ultrasonik", "Radar",
+    "QR Reader", "Camera", "Accelerometer", "Gyroscope", "Kompas", "Barometer"
+};
+
 
 // Tambahkan sensor baru ke linked list
 string IoTNetwork::addSensor(int id, const string &location, const string &type)
@@ -300,6 +321,54 @@ string IoTNetwork::undoLastMeasurement(int sensorId)
     cout << msg << endl;
     return msg;
 }
+
+void IoTNetwork::loadRandomSampleData(int count) {
+    srand(static_cast<unsigned>(time(nullptr)));
+
+    for (int i = 0; i < count; ++i) {
+        int id = 100 + i;
+        string location = LOCATIONS[rand() % (sizeof(LOCATIONS) / sizeof(string))];
+        string type = SENSOR_TYPES[rand() % (sizeof(SENSOR_TYPES) / sizeof(string))];
+
+        addSensor(id, location, type);
+    }
+}
+
+string IoTNetwork::loadRandomMeasurementsToAll(int jumlahPengukuranPerSensor)
+{
+    srand(static_cast<unsigned>(time(nullptr)));
+
+    if (head == nullptr)
+    {
+        string msg = "Tidak ada sensor untuk ditambahkan pengukuran.";
+        cout << msg << endl;
+        return msg;
+    }
+
+    ostringstream oss;
+    SensorNode* current = head;
+
+    while (current != nullptr)
+    {
+        int sensorId = current->id;
+        oss << "Sensor ID " << sensorId << ":\n";
+
+        for (int i = 0; i < jumlahPengukuranPerSensor; ++i)
+        {
+            double value = static_cast<double>(rand() % 10000) / 100.0;  // misalnya 0.00 - 99.99
+            string result = addMeasurement(sensorId, value);
+            oss << "  - " << result << "\n";
+        }
+
+        current = current->next;
+    }
+
+    string msg = oss.str();
+    cout << msg << endl;
+    return msg;
+}
+
+
 
 // Destructor helper
 string IoTNetwork::clearNetwork()

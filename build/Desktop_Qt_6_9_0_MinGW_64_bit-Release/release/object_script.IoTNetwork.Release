@@ -6,6 +6,7 @@ release/addsensordialog.o
 release/findsensors.o
 release/getaverage.o
 release/removesensor.o
+release/testbawa.o
 release/undomeasurement.o
 release/moc_MainWindow.o
 release/moc_addmeasurement.o
@@ -13,4 +14,5 @@ release/moc_addsensordialog.o
 release/moc_findsensors.o
 release/moc_getaverage.o
 release/moc_removesensor.o
+release/moc_testbawa.o
 release/moc_undomeasurement.o

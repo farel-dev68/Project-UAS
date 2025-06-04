@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TestBawa</class>
+ <widget class="QDialog" name="TestBawa">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>353</width>
+    <height>279</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #0078D7;</string>
+  </property>
+  <widget class="QLineEdit" name="lineMeasurement">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>130</y>
+     <width>131</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+background-color: black;</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnSample">
+   <property name="geometry">
+    <rect>
+     <x>29</x>
+     <y>190</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+background-color: black;</string>
+   </property>
+   <property name="text">
+    <string>random sample</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineSample">
+   <property name="geometry">
+    <rect>
+     <x>22</x>
+     <y>130</y>
+     <width>131</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+background-color: black;</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnMeasurement">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>190</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+background-color: black;</string>
+   </property>
+   <property name="text">
+    <string>ran measurement</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn1000">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>50</y>
+     <width>80</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+background-color: black;</string>
+   </property>
+   <property name="text">
+    <string>Test 1000</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
