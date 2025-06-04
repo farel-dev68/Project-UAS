@@ -30,7 +30,7 @@ public:
     QPushButton *btnAddMeasurement;
     QPushButton *btnGetAverage;
     QPushButton *btnDisplaySensor;
-    QPushButton *btnFindSensor;
+    QPushButton *btnFindSensors;
     QPushButton *btnUndoMeasurement;
     QPushButton *btnSortnDisplay;
     QPushButton *btnClear;
@@ -111,17 +111,17 @@ public:
         btnDisplaySensor->setIconSize(QSize(16, 16));
         btnDisplaySensor->setAutoDefault(false);
         btnDisplaySensor->setFlat(false);
-        btnFindSensor = new QPushButton(centralwidget);
-        btnFindSensor->setObjectName("btnFindSensor");
-        btnFindSensor->setGeometry(QRect(430, 480, 141, 51));
-        btnFindSensor->setFont(font);
-        btnFindSensor->setAutoFillBackground(false);
-        btnFindSensor->setStyleSheet(QString::fromUtf8("color: white;\n"
+        btnFindSensors = new QPushButton(centralwidget);
+        btnFindSensors->setObjectName("btnFindSensors");
+        btnFindSensors->setGeometry(QRect(430, 480, 141, 51));
+        btnFindSensors->setFont(font);
+        btnFindSensors->setAutoFillBackground(false);
+        btnFindSensors->setStyleSheet(QString::fromUtf8("color: white;\n"
 "background-color: black;\n"
 ""));
-        btnFindSensor->setIconSize(QSize(16, 16));
-        btnFindSensor->setAutoDefault(false);
-        btnFindSensor->setFlat(false);
+        btnFindSensors->setIconSize(QSize(16, 16));
+        btnFindSensors->setAutoDefault(false);
+        btnFindSensors->setFlat(false);
         btnUndoMeasurement = new QPushButton(centralwidget);
         btnUndoMeasurement->setObjectName("btnUndoMeasurement");
         btnUndoMeasurement->setGeometry(QRect(610, 560, 151, 51));
@@ -203,7 +203,7 @@ public:
         btnAddMeasurement->setDefault(true);
         btnGetAverage->setDefault(true);
         btnDisplaySensor->setDefault(true);
-        btnFindSensor->setDefault(true);
+        btnFindSensors->setDefault(true);
         btnUndoMeasurement->setDefault(true);
         btnSortnDisplay->setDefault(true);
         btnClear->setDefault(true);
@@ -222,7 +222,7 @@ public:
         btnAddMeasurement->setText(QCoreApplication::translate("MainWindow", "Tambah Pengukuran", nullptr));
         btnGetAverage->setText(QCoreApplication::translate("MainWindow", "Menghitung rata-rata", nullptr));
         btnDisplaySensor->setText(QCoreApplication::translate("MainWindow", "Tampilkan Sensor", nullptr));
-        btnFindSensor->setText(QCoreApplication::translate("MainWindow", "Temukan Sensor", nullptr));
+        btnFindSensors->setText(QCoreApplication::translate("MainWindow", "Temukan Sensor", nullptr));
         btnUndoMeasurement->setText(QCoreApplication::translate("MainWindow", "Batalkan Pengukuran", nullptr));
         btnSortnDisplay->setText(QCoreApplication::translate("MainWindow", "Sort & Display", nullptr));
         btnClear->setText(QCoreApplication::translate("MainWindow", "CLEAR", nullptr));

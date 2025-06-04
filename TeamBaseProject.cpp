@@ -10,7 +10,8 @@ using namespace std;
 
 
 IoTNetwork network;
-void testCase() {
+void testCase()
+{
     network.addSensor(1, "Ruang Tamu", "Suhu");
     network.addSensor(2, "Kamar Tidur", "Kelembapan");
     network.addSensor(3, "Dapur", "Asap");
@@ -26,12 +27,13 @@ void testCase() {
     network.removeSensor(1);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
 
     QApplication app(argc, argv);
     MainWindow window(network);  // Kirim referensi ke konstruktor
     window.show();
-    testCase();
+    cout << " Selamat Datang!!, ini consol IoTMonitoring" << endl;
 
     return app.exec();
     // return 0;

@@ -10,18 +10,20 @@
 #include "displaymeasurement.h"
 #include <QMessageBox>
 
-// Konstruktor: simpan referensi ke IoTNetwork
+// Konstruktor MainWindow: menginisialisasi UI dan menyimpan referensi ke IoTNetwork
 MainWindow::MainWindow(IoTNetwork &networkRef, QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow), network(networkRef)
 {
-    ui->setupUi(this);
+    ui->setupUi(this); // Men-setup tampilan antarmuka pengguna
 }
 
+// Destruktor: membersihkan memori untuk UI
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 
+// Handler untuk tombol "Add Sensor" - membuka dialog untuk menambah sensor baru
 void MainWindow::on_btnAddSensor_clicked()
 {
     AddSensorDialog dialog(this);
@@ -30,11 +32,13 @@ void MainWindow::on_btnAddSensor_clicked()
         QString location = dialog.getLocation();
         QString type = dialog.getType();
 
+        // Menambahkan sensor ke jaringan IoT
         std::string result = network.addSensor(id, location.toStdString(), type.toStdString());
         ui->textOutput->append(QString::fromStdString(result));
     }
 }
 
+// Handler untuk tombol "Remove Sensor" - membuka dialog untuk menghapus sensor berdasarkan ID
 void MainWindow::on_btnRemoveSensor_clicked()
 {
     RemoveSensor dialog(this);
@@ -46,6 +50,7 @@ void MainWindow::on_btnRemoveSensor_clicked()
     }
 }
 
+// Handler untuk tombol "Add Measurement" - membuka dialog untuk menambah data pengukuran ke sensor
 void MainWindow::on_btnAddMeasurement_clicked()
 {
     AddMeasurement dialog(this);
@@ -58,12 +63,14 @@ void MainWindow::on_btnAddMeasurement_clicked()
     }
 }
 
+// Handler untuk tombol "Display Sensors" - menampilkan semua sensor yang ada di jaringan
 void MainWindow::on_btnDisplaySensor_clicked()
 {
     std::string result = network.displaySensors();
     ui->textOutput->append(QString::fromStdString(result));
 }
 
+// Handler untuk tombol "Find Sensors" - mencari sensor berdasarkan lokasi
 void MainWindow::on_btnFindSensors_clicked()
 {
     FindSensors dialog(this);
@@ -75,13 +82,14 @@ void MainWindow::on_btnFindSensors_clicked()
     }
 }
 
-
+// Handler untuk tombol "Sort and Display" - menampilkan sensor yang diurutkan berdasarkan lokasi
 void MainWindow::on_btnSortnDisplay_clicked()
 {
     std::string result = network.sortAndDisplaySensorsByLocation();
     ui->textOutput->append(QString::fromStdString(result));
 }
 
+// Handler untuk tombol "Display Measurement" - menampilkan semua pengukuran untuk sensor tertentu
 void MainWindow::on_btnDisplayMeasurement_clicked()
 {
     DisplayMeasurement dialog(this);
@@ -93,6 +101,7 @@ void MainWindow::on_btnDisplayMeasurement_clicked()
     }
 }
 
+// Handler untuk tombol "Undo Measurement" - membatalkan pengukuran terakhir untuk sensor tertentu
 void MainWindow::on_btnUndoMeasurement_clicked()
 {
     UndoMeasurement dialog(this);
@@ -104,6 +113,7 @@ void MainWindow::on_btnUndoMeasurement_clicked()
     }
 }
 
+// Handler untuk tombol "Get Average" - menghitung rata-rata pengukuran untuk sensor tertentu
 void MainWindow::on_btnGetAverage_clicked()
 {
     GetAverage dialog(this);
@@ -115,12 +125,14 @@ void MainWindow::on_btnGetAverage_clicked()
     }
 }
 
+// Handler untuk tombol "Clear Network" - menghapus seluruh data sensor dari jaringan
 void MainWindow::on_btnClear_clicked()
 {
     std::string result = network.clearNetwork();
     ui->textOutput->append(QString::fromStdString(result));
 }
 
+// Handler untuk tombol "Test Bawa" - memuat data uji berdasarkan mode: testCase, measurement, atau sample
 void MainWindow::on_btnTestBawa_clicked()
 {
     TestBawa dialog(this);
@@ -131,11 +143,11 @@ void MainWindow::on_btnTestBawa_clicked()
         std::string result;
 
         if (mode == "1000") {
-            result = network.testCase();
+            result = network.testCase(); // Tambah 1000 sensor untuk pengujian performa
         } else if (mode == "measurement") {
-            result = network.loadRandomMeasurementsToAll(jumlah);
+            result = network.loadRandomMeasurementsToAll(jumlah); // Tambah pengukuran acak ke semua sensor
         } else if (mode == "sample") {
-            result = network.loadRandomSampleData(jumlah);
+            result = network.loadRandomSampleData(jumlah); // Tambah sensor acak untuk uji coba
         }
 
         ui->textOutput->append(QString::fromStdString(result));

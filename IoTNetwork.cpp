@@ -13,9 +13,25 @@
 
 using namespace std;
 
-// Konstruktor
+// Header dan library standard
+#include "IoTNetwork.h"
+#include <iostream>
+#include <iomanip>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <algorithm>
+#include <QString>
+#include <sstream>
+#include <cstdlib>  // untuk fungsi rand()
+#include <ctime>    // untuk fungsi time()
+
+using namespace std;
+
+// Konstruktor: inisialisasi linked list kosong
 IoTNetwork::IoTNetwork() : head(nullptr) {}
 
+// Array lokasi dan tipe sensor yang digunakan untuk data acak
 const std::string LOCATIONS[] = {
     "Ruang Lab A", "Ruang Lab B", "Ruang Server", "Ruang Kelas 1", "Ruang Kelas 2",
     "Gudang", "Lobby", "Lorong Utama", "Atap Gedung", "Basement",
@@ -23,7 +39,18 @@ const std::string LOCATIONS[] = {
     "Toilet Pria", "Toilet Wanita", "Lift", "Tangga Darurat", "Ruang Admin",
     "Ruang Dosen", "Ruang Mahasiswa", "Ruang Meeting", "Kafetaria", "Kantin",
     "Pos Satpam", "Gerbang Utama", "Gudang IT", "Panel Listrik", "Ruang CCTV",
-    "Ruang Pendingin", "Ruang AC Sentral"
+    "Ruang Pendingin", "Ruang AC Sentral", "Ruang Arsip", "Ruang Rapat Besar", "Studio Podcast", "Ruang Podcast",
+    "Ruang Penyimpanan Bahan Kimia", "Ruang Kesehatan", "Ruang Konseling",
+    "Laboratorium Biologi", "Laboratorium Fisika", "Laboratorium Kimia",
+    "Studio Rekaman", "Studio Editing", "Ruang Fotokopi", "Ruang Server Cadangan",
+    "Ruang Maintenance", "Ruang Penelitian", "Ruang Penjurusan", "Ruang Ekstrakurikuler",
+    "Ruang Proyektor", "Ruang Simulasi", "Ruang Observasi", "Ruang Isolasi",     "Ruang Dimensi Alternatif", "Lorong Waktu", "Server Matrix", "Gudang Rahasia",
+    "Kamar Batman", "Area Terlarang", "Ruang Penuh Kabel", "Ruang Tanpa Sinyal",
+    "Portal Quantum", "Ruang Ilusi", "Ruang Serbaguna Tapi Tidak Pernah Dipakai",
+    "Lift Tapi Tangga", "Ruang Tidak Terdaftar", "Kamar 404", "Server Utama Tapi Bohongan",
+    "Ruang Anti-Gravitasi", "Ruang Simulasi AI", "Gudang Alien", "Ruang Hantu",
+    "Lorong Gelap yang Sering Mati Lampu"
+
 };
 
 const std::string SENSOR_TYPES[] = {
@@ -33,10 +60,10 @@ const std::string SENSOR_TYPES[] = {
     "QR Reader", "Camera", "Accelerometer", "Gyroscope", "Kompas", "Barometer"
 };
 
-
-// Tambahkan sensor baru ke linked list
+// Fungsi untuk menambahkan sensor baru ke dalam linked list
 string IoTNetwork::addSensor(int id, const string &location, const string &type)
 {
+    // Cek apakah sensor dengan ID yang sama sudah ada
     SensorNode *current = head;
     while (current != nullptr)
     {
@@ -49,6 +76,7 @@ string IoTNetwork::addSensor(int id, const string &location, const string &type)
         current = current->next;
     }
 
+    // Buat node baru dan tempatkan di awal linked list
     SensorNode *newNode = new SensorNode(id, location, type);
     newNode->next = head;
     head = newNode;
@@ -59,9 +87,10 @@ string IoTNetwork::addSensor(int id, const string &location, const string &type)
     return msg;
 }
 
-// Hapus sensor berdasarkan ID
+// Fungsi untuk menghapus sensor berdasarkan ID
 string IoTNetwork::removeSensor(int id)
 {
+    // Jika list kosong
     if (head == nullptr)
     {
         string msg = "Sensor tidak ditemukan. List kosong.";
@@ -69,6 +98,7 @@ string IoTNetwork::removeSensor(int id)
         return msg;
     }
 
+    // Jika sensor yang dihapus adalah head
     if (head->id == id)
     {
         SensorNode *temp = head;
@@ -79,12 +109,14 @@ string IoTNetwork::removeSensor(int id)
         return msg;
     }
 
+    // Cari node sebelumnya
     SensorNode *current = head;
     while (current->next != nullptr && current->next->id != id)
     {
         current = current->next;
     }
 
+    // Jika sensor tidak ditemukan
     if (current->next == nullptr)
     {
         string msg = "Sensor dengan ID " + to_string(id) + " tidak ditemukan.";
@@ -92,6 +124,7 @@ string IoTNetwork::removeSensor(int id)
         return msg;
     }
 
+    // Hapus node yang ditemukan
     SensorNode *temp = current->next;
     current->next = current->next->next;
     delete temp;
@@ -100,7 +133,7 @@ string IoTNetwork::removeSensor(int id)
     return msg;
 }
 
-// Tambahkan pengukuran ke sensor
+// Fungsi untuk menambahkan pengukuran pada sensor
 string IoTNetwork::addMeasurement(int sensorId, double value)
 {
     SensorNode *current = head;
@@ -108,11 +141,13 @@ string IoTNetwork::addMeasurement(int sensorId, double value)
     {
         if (current->id == sensorId)
         {
+            // Jika queue sudah penuh (maks 10), hapus data tertua
             if (current->measurements.size() >= 10)
             {
                 current->measurements.pop();
             }
 
+            // Tambah nilai pengukuran ke queue dan history (stack)
             current->measurements.push(value);
             current->measurementHistory.push(value);
 
@@ -128,7 +163,7 @@ string IoTNetwork::addMeasurement(int sensorId, double value)
     return msg;
 }
 
-// Dapatkan rata-rata pengukuran
+// Fungsi untuk menghitung rata-rata pengukuran dari sensor tertentu
 string IoTNetwork::getAverageMeasurement(int sensorId)
 {
     SensorNode *current = head;
@@ -143,6 +178,7 @@ string IoTNetwork::getAverageMeasurement(int sensorId)
                 return msg;
             }
 
+            // Hitung rata-rata dari data dalam queue
             queue<double> tempQueue = current->measurements;
             double sum = 0.0;
             int count = 0;
@@ -170,7 +206,7 @@ string IoTNetwork::getAverageMeasurement(int sensorId)
     return msg;
 }
 
-// Cari sensor berdasarkan lokasi
+// Fungsi untuk mencari semua sensor di lokasi tertentu
 string IoTNetwork::findSensors(const string &location)
 {
     ostringstream oss;
@@ -185,6 +221,7 @@ string IoTNetwork::findSensors(const string &location)
     oss << "Sensor di lokasi " << location << ":\n";
     oss << left << setw(5) << "ID" << setw(15) << "Lokasi" << setw(15) << "Tipe" << "\n";
 
+    // Telusuri semua node
     SensorNode *current = head;
     while (current != nullptr)
     {
@@ -198,21 +235,12 @@ string IoTNetwork::findSensors(const string &location)
         current = current->next;
     }
 
-    string msg;
-    if (!found)
-    {
-        msg = "Tidak ditemukan sensor di lokasi " + location;
-    }
-    else
-    {
-        msg = oss.str();
-    }
-
+    string msg = found ? oss.str() : "Tidak ditemukan sensor di lokasi " + location;
     cout << msg << endl;
     return msg;
 }
 
-// Tampilkan semua sensor
+// Fungsi untuk menampilkan semua sensor
 string IoTNetwork::displaySensors()
 {
     ostringstream oss;
@@ -224,10 +252,9 @@ string IoTNetwork::displaySensors()
     }
 
     oss << "\nDaftar Sensor:\n";
-    oss << left << setw(5) << "ID"
-        << setw(15) << "Lokasi"
-        << setw(15) << "Tipe" << "\n";
+    oss << left << setw(5) << "ID" << setw(15) << "Lokasi" << setw(15) << "Tipe" << "\n";
 
+    // Cetak semua node
     SensorNode *current = head;
     while (current != nullptr)
     {
@@ -242,7 +269,7 @@ string IoTNetwork::displaySensors()
     return msg;
 }
 
-// Urutkan dan tampilkan sensor berdasarkan lokasi
+// Fungsi untuk mengurutkan sensor berdasarkan lokasi
 string IoTNetwork::sortAndDisplaySensorsByLocation()
 {
     vector<SensorNode *> sensors;
@@ -260,15 +287,14 @@ string IoTNetwork::sortAndDisplaySensorsByLocation()
         return msg;
     }
 
+    // Urutkan vector berdasarkan lokasi
     sort(sensors.begin(), sensors.end(), [](SensorNode *a, SensorNode *b) {
         return a->location < b->location;
     });
 
     ostringstream oss;
     oss << "Sensor diurutkan berdasarkan lokasi:\n";
-    oss << left << setw(5) << "ID"
-        << setw(15) << "Lokasi"
-        << setw(15) << "Tipe" << "\n";
+    oss << left << setw(5) << "ID" << setw(15) << "Lokasi" << setw(15) << "Tipe" << "\n";
 
     for (SensorNode *sensor : sensors)
     {
@@ -282,7 +308,7 @@ string IoTNetwork::sortAndDisplaySensorsByLocation()
     return msg;
 }
 
-// Undo pengukuran terakhir
+// Fungsi undo untuk membatalkan pengukuran terakhir
 string IoTNetwork::undoLastMeasurement(int sensorId)
 {
     SensorNode *current = head;
@@ -297,17 +323,16 @@ string IoTNetwork::undoLastMeasurement(int sensorId)
                 return msg;
             }
 
-            current->measurementHistory.pop();
+            current->measurementHistory.pop();  // hapus dari stack
 
+            // Hapus elemen terakhir dari queue (manual karena queue tidak punya pop_back)
             queue<double> tempQueue;
             int size = current->measurements.size();
-
             for (int i = 0; i < size - 1; ++i)
             {
                 tempQueue.push(current->measurements.front());
                 current->measurements.pop();
             }
-
             current->measurements = tempQueue;
 
             string msg = "Pengukuran terakhir untuk sensor ID " + to_string(sensorId) + " telah dihapus (undo).";
@@ -322,7 +347,7 @@ string IoTNetwork::undoLastMeasurement(int sensorId)
     return msg;
 }
 
-// Tampilkan semua pengukuran untuk sensor tertentu
+// Tampilkan semua pengukuran pada sensor tertentu
 string IoTNetwork::displayMeasurement(int sensorId)
 {
     SensorNode *current = head;
@@ -362,23 +387,22 @@ string IoTNetwork::displayMeasurement(int sensorId)
     return msg;
 }
 
-
+// Tambahkan sejumlah sensor dengan data acak
 string IoTNetwork::loadRandomSampleData(int count) {
     srand(static_cast<unsigned>(time(nullptr)));
     ostringstream oss;
 
     for (int i = 0; i < count; ++i) {
-        int id = 100 + i;
+        int id = i+1;
         string location = LOCATIONS[rand() % (sizeof(LOCATIONS) / sizeof(string))];
         string type = SENSOR_TYPES[rand() % (sizeof(SENSOR_TYPES) / sizeof(string))];
-
         string result = addSensor(id, location, type);
         oss << "  - " << result << "\n";
     }
-    string msg = oss.str();
-    return msg;
+    return oss.str();
 }
 
+// Tambahkan sejumlah pengukuran acak ke semua sensor
 string IoTNetwork::loadRandomMeasurementsToAll(int jumlahPengukuranPerSensor)
 {
     srand(static_cast<unsigned>(time(nullptr)));
@@ -400,7 +424,7 @@ string IoTNetwork::loadRandomMeasurementsToAll(int jumlahPengukuranPerSensor)
 
         for (int i = 0; i < jumlahPengukuranPerSensor; ++i)
         {
-            double value = static_cast<double>(rand() % 10000) / 100.0;  // misalnya 0.00 - 99.99
+            double value = static_cast<double>(rand() % 10000) / 100.0;  // nilai 0.00–99.99
             string result = addMeasurement(sensorId, value);
             oss << "  - " << result << "\n";
         }
@@ -413,6 +437,7 @@ string IoTNetwork::loadRandomMeasurementsToAll(int jumlahPengukuranPerSensor)
     return msg;
 }
 
+// Fungsi untuk melakukan stress test dengan menambah 1000 sensor
 string IoTNetwork::testCase() {
     string msg = "tambah 1000 sensor\n";
     for (int i = 0; i < 1000; i++) {
@@ -421,7 +446,7 @@ string IoTNetwork::testCase() {
     return msg;
 }
 
-// Destructor helper
+// Menghapus semua node di jaringan (destruktor helper)
 string IoTNetwork::clearNetwork()
 {
     int count = 0;
@@ -439,7 +464,7 @@ string IoTNetwork::clearNetwork()
     return msg;
 }
 
-// Destructor
+// Destructor: panggil clearNetwork untuk membebaskan memori
 IoTNetwork::~IoTNetwork()
 {
     clearNetwork();

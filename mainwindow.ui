@@ -236,7 +236,7 @@ background-color: black;
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnFindSensor">
+   <widget class="QPushButton" name="btnFindSensors">
     <property name="geometry">
      <rect>
       <x>430</x>

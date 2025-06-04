@@ -19,4 +19,4 @@ perubahan:
 
 ![Integrasi Main](Images/Integrasi%20Main.png)
 
-![alt text](image.png)
+![alt text](Images/image1.png)
