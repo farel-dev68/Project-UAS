@@ -1,6 +1,7 @@
 #include "MainWindow.h"
 #include "ui_mainwindow.h"
 #include "AddSensorDialog.h"
+#include "addmeasurement.h"
 #include <QMessageBox>
 
 // Konstruktor: simpan referensi ke IoTNetwork
@@ -28,7 +29,43 @@ void MainWindow::on_btnAddSensor_clicked()
     }
 }
 
+
 void MainWindow::on_btnRemoveSensor_clicked()
 {
-    QMessageBox::information(this, "Halo", "ANJAAY!");
+
+}
+void MainWindow::on_btnAddMeasurement_clicked()
+{
+    AddMeasurement dialog(this);
+    if (dialog.exec() == QDialog::Accepted) {
+        int id = dialog.getSensorID();
+        double value = dialog.getValue();
+
+        std::string result = network.addMeasurement(id, value);
+        ui->textOutput->append(QString::fromStdString(result));
+    }
+}
+void MainWindow::on_btnDisplaySensor_clicker()
+{
+
+}
+void MainWindow::on_btnFindSensors_clicked()
+{
+
+}
+void MainWindow::on_btnSortnDisplay_clicked()
+{
+
+}
+void MainWindow::on_btnUndoMeasurement_clicked()
+{
+
+}
+void MainWindow::on_btnGetAverage_clicked()
+{
+
+}
+void MainWindow::on_btnTestSensor_clicked()
+{
+
 }

@@ -31,9 +31,9 @@ public:
     QPushButton *btnGetAverage;
     QPushButton *btnDisplaySensor;
     QPushButton *btnFindSensor;
-    QPushButton *btnFindSensor_2;
-    QPushButton *btnFindSensor_3;
-    QPushButton *btnFindSensor_4;
+    QPushButton *btnUndoMeasurement;
+    QPushButton *btnSortnDisplay;
+    QPushButton *btnTestSensor;
     QTextBrowser *textOutput_2;
     QTextBrowser *textOutput_3;
     QMenuBar *menubar;
@@ -120,39 +120,39 @@ public:
         btnFindSensor->setIconSize(QSize(16, 16));
         btnFindSensor->setAutoDefault(false);
         btnFindSensor->setFlat(false);
-        btnFindSensor_2 = new QPushButton(centralwidget);
-        btnFindSensor_2->setObjectName("btnFindSensor_2");
-        btnFindSensor_2->setGeometry(QRect(610, 490, 151, 51));
-        btnFindSensor_2->setFont(font);
-        btnFindSensor_2->setAutoFillBackground(false);
-        btnFindSensor_2->setStyleSheet(QString::fromUtf8("color: white;\n"
+        btnUndoMeasurement = new QPushButton(centralwidget);
+        btnUndoMeasurement->setObjectName("btnUndoMeasurement");
+        btnUndoMeasurement->setGeometry(QRect(610, 490, 151, 51));
+        btnUndoMeasurement->setFont(font);
+        btnUndoMeasurement->setAutoFillBackground(false);
+        btnUndoMeasurement->setStyleSheet(QString::fromUtf8("color: white;\n"
 "background-color: black;\n"
 ""));
-        btnFindSensor_2->setIconSize(QSize(16, 16));
-        btnFindSensor_2->setAutoDefault(false);
-        btnFindSensor_2->setFlat(false);
-        btnFindSensor_3 = new QPushButton(centralwidget);
-        btnFindSensor_3->setObjectName("btnFindSensor_3");
-        btnFindSensor_3->setGeometry(QRect(610, 410, 151, 51));
-        btnFindSensor_3->setFont(font);
-        btnFindSensor_3->setAutoFillBackground(false);
-        btnFindSensor_3->setStyleSheet(QString::fromUtf8("color: white;\n"
+        btnUndoMeasurement->setIconSize(QSize(16, 16));
+        btnUndoMeasurement->setAutoDefault(false);
+        btnUndoMeasurement->setFlat(false);
+        btnSortnDisplay = new QPushButton(centralwidget);
+        btnSortnDisplay->setObjectName("btnSortnDisplay");
+        btnSortnDisplay->setGeometry(QRect(610, 410, 151, 51));
+        btnSortnDisplay->setFont(font);
+        btnSortnDisplay->setAutoFillBackground(false);
+        btnSortnDisplay->setStyleSheet(QString::fromUtf8("color: white;\n"
 "background-color: black;\n"
 ""));
-        btnFindSensor_3->setIconSize(QSize(16, 16));
-        btnFindSensor_3->setAutoDefault(false);
-        btnFindSensor_3->setFlat(false);
-        btnFindSensor_4 = new QPushButton(centralwidget);
-        btnFindSensor_4->setObjectName("btnFindSensor_4");
-        btnFindSensor_4->setGeometry(QRect(610, 330, 151, 51));
-        btnFindSensor_4->setFont(font);
-        btnFindSensor_4->setAutoFillBackground(false);
-        btnFindSensor_4->setStyleSheet(QString::fromUtf8("color: white;\n"
+        btnSortnDisplay->setIconSize(QSize(16, 16));
+        btnSortnDisplay->setAutoDefault(false);
+        btnSortnDisplay->setFlat(false);
+        btnTestSensor = new QPushButton(centralwidget);
+        btnTestSensor->setObjectName("btnTestSensor");
+        btnTestSensor->setGeometry(QRect(610, 330, 151, 51));
+        btnTestSensor->setFont(font);
+        btnTestSensor->setAutoFillBackground(false);
+        btnTestSensor->setStyleSheet(QString::fromUtf8("color: white;\n"
 "background-color: black;\n"
 ""));
-        btnFindSensor_4->setIconSize(QSize(16, 16));
-        btnFindSensor_4->setAutoDefault(false);
-        btnFindSensor_4->setFlat(false);
+        btnTestSensor->setIconSize(QSize(16, 16));
+        btnTestSensor->setAutoDefault(false);
+        btnTestSensor->setFlat(false);
         textOutput_2 = new QTextBrowser(centralwidget);
         textOutput_2->setObjectName("textOutput_2");
         textOutput_2->setGeometry(QRect(600, 80, 181, 151));
@@ -180,9 +180,9 @@ public:
         btnGetAverage->setDefault(true);
         btnDisplaySensor->setDefault(true);
         btnFindSensor->setDefault(true);
-        btnFindSensor_2->setDefault(true);
-        btnFindSensor_3->setDefault(true);
-        btnFindSensor_4->setDefault(true);
+        btnUndoMeasurement->setDefault(true);
+        btnSortnDisplay->setDefault(true);
+        btnTestSensor->setDefault(true);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -197,9 +197,9 @@ public:
         btnGetAverage->setText(QCoreApplication::translate("MainWindow", "Menghitung rata-rata", nullptr));
         btnDisplaySensor->setText(QCoreApplication::translate("MainWindow", "Tampilkan Sensor", nullptr));
         btnFindSensor->setText(QCoreApplication::translate("MainWindow", "Temukan Sensor", nullptr));
-        btnFindSensor_2->setText(QCoreApplication::translate("MainWindow", "Batalkan Pengukuran", nullptr));
-        btnFindSensor_3->setText(QCoreApplication::translate("MainWindow", "Sort & Display", nullptr));
-        btnFindSensor_4->setText(QCoreApplication::translate("MainWindow", "Pengujian 1000 sensor", nullptr));
+        btnUndoMeasurement->setText(QCoreApplication::translate("MainWindow", "Batalkan Pengukuran", nullptr));
+        btnSortnDisplay->setText(QCoreApplication::translate("MainWindow", "Sort & Display", nullptr));
+        btnTestSensor->setText(QCoreApplication::translate("MainWindow", "Pengujian 1000 sensor", nullptr));
         textOutput_2->setHtml(QCoreApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"

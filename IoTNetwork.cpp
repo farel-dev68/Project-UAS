@@ -76,7 +76,7 @@ void IoTNetwork::removeSensor(int id)
 }
 
 // Tambahkan pengukuran ke sensor
-void IoTNetwork::addMeasurement(int sensorId, double value)
+string IoTNetwork::addMeasurement(int sensorId, double value)
 {
     SensorNode *current = head;
     while (current != nullptr)
@@ -84,8 +84,8 @@ void IoTNetwork::addMeasurement(int sensorId, double value)
         if (current->id == sensorId)
         {
             current->measurements.push(value);
-            cout << "Measurement " << value << " ditambahkan ke sensor ID " << sensorId << "." << endl;
-
+            string msg = "Measurement " + to_string(value) + " ditambahkan ke sensor ID " + to_string(sensorId) + ".\n";
+            cout << msg << endl; // debug ke terminal
             if (!current->measurements.empty())
             {
                 current->measurementHistory.push(current->measurements.back());
@@ -96,12 +96,14 @@ void IoTNetwork::addMeasurement(int sensorId, double value)
                 current->measurements.pop();
             }
 
-            return;
+            return msg;
         }
         current = current->next;
     }
 
-    cout << "Sensor dengan ID " << sensorId << " tidak ditemukan." << endl;
+    string msg = "Sensor dengan ID: " + to_string(sensorId) + " tidak ditemukan.\n";
+    cout << msg << endl; // debug ke terminal
+    return msg;                    // untuk tampilkan di UI
 }
 
 double IoTNetwork::getAverageMeasurement(int sensorId)

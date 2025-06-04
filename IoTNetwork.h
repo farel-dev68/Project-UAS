@@ -10,7 +10,7 @@ class IoTNetwork {
 public:
     IoTNetwork();
     string addSensor(int id, const string &location, const string &type);
-    void addMeasurement(int sensorId, double value);
+    string addMeasurement(int sensorId, double value);
     void removeSensor(int id);
     void findSensors(const string &location);
     void displaySensors();

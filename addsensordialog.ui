@@ -14,7 +14,7 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: #87CEFA;</string>
+   <string notr="true">background-color: #0078D7;</string>
   </property>
   <widget class="QLineEdit" name="lineSensorID">
    <property name="geometry">
@@ -75,7 +75,7 @@ background-color: black;</string>
     <string>SUBMIT</string>
    </property>
   </widget>
-  <widget class="QTextEdit" name="textEdit">
+  <widget class="QTextBrowser" name="textBrowser">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -99,7 +99,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;ID SENSOR&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QTextEdit" name="textEdit_2">
+  <widget class="QTextBrowser" name="textBrowser_2">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -123,7 +123,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;LOKASI SENSOR&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QTextEdit" name="textEdit_3">
+  <widget class="QTextBrowser" name="textBrowser_3">
    <property name="geometry">
     <rect>
      <x>30</x>

@@ -14,6 +14,7 @@
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QTextEdit>
 
 QT_BEGIN_NAMESPACE
@@ -25,7 +26,7 @@ public:
     QLineEdit *lineLocation;
     QLineEdit *lineType;
     QPushButton *btnSubmit;
-    QTextEdit *textEdit;
+    QTextBrowser *textBrowser;
     QTextEdit *textEdit_2;
     QTextEdit *textEdit_3;
 
@@ -34,7 +35,7 @@ public:
         if (AddSensorDialog->objectName().isEmpty())
             AddSensorDialog->setObjectName("AddSensorDialog");
         AddSensorDialog->resize(320, 240);
-        AddSensorDialog->setStyleSheet(QString::fromUtf8("background-color: #87CEFA;"));
+        AddSensorDialog->setStyleSheet(QString::fromUtf8("background-color: #0078D7;"));
         lineSensorID = new QLineEdit(AddSensorDialog);
         lineSensorID->setObjectName("lineSensorID");
         lineSensorID->setGeometry(QRect(160, 40, 113, 31));
@@ -55,10 +56,10 @@ public:
         btnSubmit->setGeometry(QRect(110, 190, 80, 24));
         btnSubmit->setStyleSheet(QString::fromUtf8("color: white;\n"
 "background-color: black;"));
-        textEdit = new QTextEdit(AddSensorDialog);
-        textEdit->setObjectName("textEdit");
-        textEdit->setGeometry(QRect(30, 40, 111, 31));
-        textEdit->setStyleSheet(QString::fromUtf8("color: white;\n"
+        textBrowser = new QTextBrowser(AddSensorDialog);
+        textBrowser->setObjectName("textBrowser");
+        textBrowser->setGeometry(QRect(30, 40, 111, 31));
+        textBrowser->setStyleSheet(QString::fromUtf8("color: white;\n"
 "background-color: black;"));
         textEdit_2 = new QTextEdit(AddSensorDialog);
         textEdit_2->setObjectName("textEdit_2");
@@ -80,7 +81,7 @@ public:
     {
         AddSensorDialog->setWindowTitle(QCoreApplication::translate("AddSensorDialog", "Dialog", nullptr));
         btnSubmit->setText(QCoreApplication::translate("AddSensorDialog", "SUBMIT", nullptr));
-        textEdit->setHtml(QCoreApplication::translate("AddSensorDialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        textBrowser->setHtml(QCoreApplication::translate("AddSensorDialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "hr { height: 1px; border-width: 0; }\n"

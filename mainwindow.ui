@@ -277,7 +277,7 @@ background-color: black;
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnFindSensor_2">
+   <widget class="QPushButton" name="btnUndoMeasurement">
     <property name="geometry">
      <rect>
       <x>610</x>
@@ -318,7 +318,7 @@ background-color: black;
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnFindSensor_3">
+   <widget class="QPushButton" name="btnSortnDisplay">
     <property name="geometry">
      <rect>
       <x>610</x>
@@ -359,7 +359,7 @@ background-color: black;
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnFindSensor_4">
+   <widget class="QPushButton" name="btnTestSensor">
     <property name="geometry">
      <rect>
       <x>610</x>
