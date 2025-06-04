@@ -8,8 +8,9 @@
 
 using namespace std;
 
-int main(int argc, char *argv[]) {
-    IoTNetwork network;
+
+IoTNetwork network;
+void testCase() {
     network.addSensor(1, "Ruang Tamu", "Suhu");
     network.addSensor(2, "Kamar Tidur", "Kelembapan");
     network.addSensor(3, "Dapur", "Asap");
@@ -22,20 +23,19 @@ int main(int argc, char *argv[]) {
     network.findSensors("Kamar Tidur");
     network.undoLastMeasurement(1);
     network.sortAndDisplaySensorsByLocation();
-
-    // return 0;
     network.removeSensor(1);
+}
+
+int main(int argc, char *argv[]) {
+
+
+
+
     QApplication app(argc, argv);
-
-    // QMainWindow window;
-    // window.setStyleSheet("background-color: lightblue;");
-    // window.resize(1280, 720);
-    // window.show();
-    // int x;   // Buat objek aplikasi
-
-    MainWindow window;               // Buat objek MainWindow (kelas kamu)
+    MainWindow window(network);  // Kirim referensi ke konstruktor
     window.show();
-    // pushButton->setStyleSheet("background-color: yellow; color: red;");
+    testCase();
+
     return app.exec();
     // return 0;
 }

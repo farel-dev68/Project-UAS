@@ -1,15 +1,13 @@
-#include "IoTNetwork.h"
 #include "MainWindow.h"
 #include "ui_mainwindow.h"
-#include <QMessageBox>
 #include "AddSensorDialog.h"
+#include <QMessageBox>
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+// Konstruktor: simpan referensi ke IoTNetwork
+MainWindow::MainWindow(IoTNetwork &networkRef, QWidget *parent)
+    : QMainWindow(parent), ui(new Ui::MainWindow), network(networkRef)
 {
-    ui->setupUi(this);  // setup UI dari file .ui
-
+    ui->setupUi(this);
 }
 
 MainWindow::~MainWindow()
@@ -29,8 +27,6 @@ void MainWindow::on_btnAddSensor_clicked()
         ui->textOutput->append(QString::fromStdString(result));
     }
 }
-
-
 
 void MainWindow::on_btnRemoveSensor_clicked()
 {
