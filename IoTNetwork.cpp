@@ -1,30 +1,15 @@
-#include "IoTNetwork.h"
-#include <iostream>
-#include <iomanip>
-#include <queue>
-#include <stack>
-#include <vector>
-#include <algorithm>
-#include <QString>
-#include <sstream>
-#include <cstdlib>  // rand()
-#include <ctime>    // time()
-
-
-using namespace std;
-
 // Header dan library standard
 #include "IoTNetwork.h"
 #include <iostream>
-#include <iomanip>
-#include <queue>
-#include <stack>
-#include <vector>
-#include <algorithm>
-#include <QString>
-#include <sstream>
-#include <cstdlib>  // untuk fungsi rand()
-#include <ctime>    // untuk fungsi time()
+#include <iomanip>      // Untuk manipulasi tampilan output (setw, setprecision)
+#include <queue>        // Untuk menyimpan pengukuran dalam urutan (FIFO)
+#include <stack>        // Untuk menyimpan histori pengukuran (LIFO)
+#include <vector>       // Untuk manipulasi list sensor dalam sorting
+#include <algorithm>    // Untuk fungsi sort()
+#include <QString>      // Jika digunakan di Qt
+#include <sstream>      // Untuk membentuk output string
+#include <cstdlib>      // Untuk rand()
+#include <ctime>        // Untuk time() pada srand()
 
 using namespace std;
 
@@ -63,12 +48,13 @@ const std::string SENSOR_TYPES[] = {
 // Fungsi untuk menambahkan sensor baru ke dalam linked list
 string IoTNetwork::addSensor(int id, const string &location, const string &type)
 {
-    // Cek apakah sensor dengan ID yang sama sudah ada
+    // Cek apakah ID sudah digunakan
     SensorNode *current = head;
     while (current != nullptr)
     {
         if (current->id == id)
         {
+            // Return error jika ID sudah ada
             string msg = "Sensor dengan ID " + to_string(id) + " sudah ada.";
             cout << msg << endl;
             return msg;
@@ -76,16 +62,18 @@ string IoTNetwork::addSensor(int id, const string &location, const string &type)
         current = current->next;
     }
 
-    // Buat node baru dan tempatkan di awal linked list
+    // Tambahkan node baru di awal linked list
     SensorNode *newNode = new SensorNode(id, location, type);
     newNode->next = head;
     head = newNode;
 
+    // Return pesan sukses
     string msg = "Sensor ditambahkan:\nID: " + to_string(id) +
                  "\nLokasi: " + location + "\nTipe: " + type;
     cout << msg << endl;
     return msg;
 }
+
 
 // Fungsi untuk menghapus sensor berdasarkan ID
 string IoTNetwork::removeSensor(int id)
