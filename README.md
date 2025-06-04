@@ -18,3 +18,5 @@ perubahan:
 ![Gambar Hasil](Images/hasil.png)
 
 ![Integrasi Main](Images/Integrasi%20Main.png)
+
+![alt text](image.png)
