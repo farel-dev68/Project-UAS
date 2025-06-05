@@ -130,10 +130,10 @@ string IoTNetwork::addMeasurement(int sensorId, double value)
         if (current->id == sensorId)
         {
             // Jika queue sudah penuh (maks 10), hapus data tertua
-            if (current->measurements.size() >= 10)
-            {
-                current->measurements.pop();
-            }
+            // if (current->measurements.size() >= 10)
+            // {
+            //     current->measurements.pop();
+            // }
 
             // Tambah nilai pengukuran ke queue dan history (stack)
             current->measurements.push(value);
