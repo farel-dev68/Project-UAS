@@ -10,6 +10,8 @@
 #include <sstream>      // Untuk membentuk output string
 #include <cstdlib>      // Untuk rand()
 #include <ctime>        // Untuk time() pada srand()
+#include <cctype>    // untuk ::tolower
+#include <unordered_map> // untuk map nilai setiap tipe sensor
 
 using namespace std;
 
@@ -38,12 +40,38 @@ const std::string LOCATIONS[] = {
 
 };
 
-const std::string SENSOR_TYPES[] = {
-    "Suhu", "Kelembaban", "Gerak", "Cahaya", "Gas", "Asap", "Tekanan", "Getaran",
-    "Pintu", "Jarak", "Ketinggian", "Arus", "Tegangan", "Suara", "CO2", "PM2.5",
-    "Amonia", "Kebocoran Air", "RFID", "Magnet", "Infrared", "Ultrasonik", "Radar",
-    "QR Reader", "Camera", "Accelerometer", "Gyroscope", "Kompas", "Barometer"
+const std::unordered_map<std::string, std::pair<double, double>> SENSOR_VALID_RANGES = {
+    {"Suhu", {-50, 150}},
+    {"Kelembaban", {0, 100}},
+    {"Gerak", {0, 1}},
+    {"Cahaya", {0, 10000}},  // dalam lux
+    {"Gas", {0, 1000}},      // ppm
+    {"Asap", {0, 1000}},     // ppm
+    {"Tekanan", {300, 1100}}, // hPa
+    {"Getaran", {0, 100}},    // misalnya mm/s
+    {"Pintu", {0, 1}},
+    {"Jarak", {0, 1000}},     // cm
+    {"Ketinggian", {0, 10000}}, // m
+    {"Arus", {0, 100}},       // A
+    {"Tegangan", {0, 500}},   // V
+    {"Suara", {0, 140}},      // dB
+    {"CO2", {0, 5000}},       // ppm
+    {"PM2.5", {0, 500}},      // µg/m³
+    {"Amonia", {0, 1000}},    // ppm
+    {"Kebocoran Air", {0, 1}},
+    {"RFID", {0, 1}},
+    {"Magnet", {0, 1}},
+    {"Infrared", {0, 1}},
+    {"Ultrasonik", {0, 1000}}, // cm
+    {"Radar", {0, 1000}},      // cm
+    {"QR Reader", {0, 1}},
+    {"Camera", {0, 1}},
+    {"Accelerometer", {-16, 16}}, // g
+    {"Gyroscope", {-2000, 2000}}, // deg/s
+    {"Kompas", {0, 360}},      // degrees
+    {"Barometer", {300, 1100}} // hPa
 };
+
 
 // Fungsi untuk menambahkan sensor baru ke dalam linked list
 string IoTNetwork::addSensor(int id, const string &location, const string &type)
@@ -122,6 +150,12 @@ string IoTNetwork::removeSensor(int id)
 }
 
 // Fungsi untuk menambahkan pengukuran pada sensor
+string toLower(const string &str) {
+    string result = str;
+    transform(result.begin(), result.end(), result.begin(), ::tolower);
+    return result;
+}
+
 string IoTNetwork::addMeasurement(int sensorId, double value)
 {
     SensorNode *current = head;
@@ -129,13 +163,41 @@ string IoTNetwork::addMeasurement(int sensorId, double value)
     {
         if (current->id == sensorId)
         {
-            // Jika queue sudah penuh (maks 10), hapus data tertua
-            // if (current->measurements.size() >= 10)
-            // {
-            //     current->measurements.pop();
-            // }
+            // Normalisasi nama tipe ke lowercase untuk pencocokan
+            string typeLower = toLower(current->type);
 
-            // Tambah nilai pengukuran ke queue dan history (stack)
+            // Cari kecocokan di SENSOR_VALID_RANGES (case-insensitive)
+            auto it = find_if(
+                SENSOR_VALID_RANGES.begin(),
+                SENSOR_VALID_RANGES.end(),
+                [&typeLower](const auto &entry) {
+                    return toLower(entry.first) == typeLower;
+                });
+
+            if (it == SENSOR_VALID_RANGES.end())
+            {
+                string msg = "Tipe sensor \"" + current->type + "\" tidak dikenali atau belum memiliki rentang valid.";
+                cout << msg << endl;
+                return msg;
+            }
+
+            // Validasi nilai terhadap rentang
+            double minVal = it->second.first;
+            double maxVal = it->second.second;
+
+            if (value < minVal || value > maxVal)
+            {
+                ostringstream oss;
+                oss << fixed << setprecision(6);
+                oss << "  - Nilai " << value
+                    << " di luar rentang valid untuk sensor tipe "
+                    << current->type << " (" << minVal << " s.d. " << maxVal << ").";
+                string msg = oss.str();
+                cout << msg << endl;
+                return msg;
+            }
+
+            // Tambah ke antrian pengukuran dan histori
             current->measurements.push(value);
             current->measurementHistory.push(value);
 
@@ -150,6 +212,8 @@ string IoTNetwork::addMeasurement(int sensorId, double value)
     cout << msg << endl;
     return msg;
 }
+
+
 
 // Fungsi untuk menghitung rata-rata pengukuran dari sensor tertentu
 string IoTNetwork::getAverageMeasurement(int sensorId)
@@ -195,9 +259,11 @@ string IoTNetwork::getAverageMeasurement(int sensorId)
 }
 
 // Fungsi untuk mencari semua sensor di lokasi tertentu
-string IoTNetwork::findSensors(const string &location)
+
+string IoTNetwork::findSensors(const string &locationInput)
 {
     ostringstream oss;
+
     if (head == nullptr)
     {
         string msg = "Tidak ada sensor dalam jaringan.";
@@ -205,28 +271,38 @@ string IoTNetwork::findSensors(const string &location)
         return msg;
     }
 
+    // Ubah lokasi input ke lowercase
+    string targetLocation = locationInput;
+    transform(targetLocation.begin(), targetLocation.end(), targetLocation.begin(), ::tolower);
+
     bool found = false;
-    oss << "Sensor di lokasi " << location << ":\n";
+    oss << "Sensor yang mengandung lokasi \"" << locationInput << "\":\n";
     oss << left << setw(5) << "ID" << setw(15) << "Lokasi" << setw(15) << "Tipe" << "\n";
 
-    // Telusuri semua node
     SensorNode *current = head;
     while (current != nullptr)
     {
-        if (current->location == location)
+        // Ubah lokasi node ke lowercase
+        string nodeLocation = current->location;
+        transform(nodeLocation.begin(), nodeLocation.end(), nodeLocation.begin(), ::tolower);
+
+        // Cek apakah input merupakan bagian dari lokasi
+        if (nodeLocation.find(targetLocation) != string::npos)
         {
             oss << left << setw(5) << current->id
                 << setw(15) << current->location
                 << setw(15) << current->type << "\n";
             found = true;
         }
+
         current = current->next;
     }
 
-    string msg = found ? oss.str() : "Tidak ditemukan sensor di lokasi " + location;
+    string msg = found ? oss.str() : "Tidak ditemukan sensor dengan lokasi yang mengandung \"" + locationInput + "\".";
     cout << msg << endl;
     return msg;
 }
+
 
 // Fungsi untuk menampilkan semua sensor
 string IoTNetwork::displaySensors()
@@ -294,6 +370,69 @@ string IoTNetwork::sortAndDisplaySensorsByLocation()
     string msg = oss.str();
     cout << msg << endl;
     return msg;
+}
+
+
+string IoTNetwork::sortAndDisplaySensors(const string &criteriaInput)
+{
+    vector<SensorNode *> sensors;
+    SensorNode *current = head;
+    ostringstream oss;
+
+    while (current != nullptr)
+    {
+        sensors.push_back(current);
+        current = current->next;
+    }
+
+    if (sensors.empty())
+    {
+        string msg = "Tidak ada sensor dalam jaringan.";
+        cout << msg << endl;
+        return msg;
+    }
+
+    // Konversi criteria ke lowercase
+    string criteria = criteriaInput;
+    transform(criteria.begin(), criteria.end(), criteria.begin(), ::tolower);
+
+    if (criteria == "id")
+    {
+        sort(sensors.begin(), sensors.end(), [](SensorNode *a, SensorNode *b) {
+            return a->id < b->id;
+        });
+    }
+    else if (criteria == "lokasi")
+    {
+        sort(sensors.begin(), sensors.end(), [](SensorNode *a, SensorNode *b) {
+            return a->location < b->location;
+        });
+    }
+    else if (criteria == "tipe")
+    {
+        sort(sensors.begin(), sensors.end(), [](SensorNode *a, SensorNode *b) {
+            return a->type < b->type;
+        });
+    }
+    else
+    {
+        oss << "Kriteria pengurutan tidak dikenali : " << criteriaInput << endl;
+        string msg = oss.str();
+        cout << msg;
+        return msg;
+    }
+
+    oss << "\nSensor diurutkan berdasarkan " << criteria << ":" << endl;
+    oss << left << setw(5) << "ID" << setw(15) << "Lokasi" << setw(15) << "Tipe" << endl;
+    for (SensorNode *sensor : sensors)
+    {
+        oss << left << setw(5) << sensor->id
+            << setw(15) << sensor->location
+            << setw(15) << sensor->type << endl;
+    }
+    oss << endl;
+
+    return oss.str();
 }
 
 // Fungsi undo untuk membatalkan pengukuran terakhir
@@ -380,15 +519,24 @@ string IoTNetwork::loadRandomSampleData(int count) {
     srand(static_cast<unsigned>(time(nullptr)));
     ostringstream oss;
 
+    // Ambil semua tipe sensor yang punya rentang valid
+    vector<string> validSensorTypes;
+    for (const auto &entry : SENSOR_VALID_RANGES) {
+        validSensorTypes.push_back(entry.first);
+    }
+
     for (int i = 0; i < count; ++i) {
-        int id = i+1;
+        int id = i + 1;
         string location = LOCATIONS[rand() % (sizeof(LOCATIONS) / sizeof(string))];
-        string type = SENSOR_TYPES[rand() % (sizeof(SENSOR_TYPES) / sizeof(string))];
+        string type = validSensorTypes[rand() % validSensorTypes.size()];
+
         string result = addSensor(id, location, type);
         oss << "  - " << result << "\n";
     }
+
     return oss.str();
 }
+
 
 // Tambahkan sejumlah pengukuran acak ke semua sensor
 string IoTNetwork::loadRandomMeasurementsToAll(int jumlahPengukuranPerSensor)
@@ -408,11 +556,34 @@ string IoTNetwork::loadRandomMeasurementsToAll(int jumlahPengukuranPerSensor)
     while (current != nullptr)
     {
         int sensorId = current->id;
+        string typeLower = toLower(current->type);
+
+        // Temukan rentang valid berdasarkan tipe sensor
+        auto it = find_if(
+            SENSOR_VALID_RANGES.begin(),
+            SENSOR_VALID_RANGES.end(),
+            [&typeLower](const auto &entry) {
+                return toLower(entry.first) == typeLower;
+            });
+
+        if (it == SENSOR_VALID_RANGES.end())
+        {
+            oss << "Sensor ID " << sensorId << ": Tipe sensor \"" << current->type << "\" tidak dikenali. Lewati.\n";
+            current = current->next;
+            continue;
+        }
+
+        double minVal = it->second.first;
+        double maxVal = it->second.second;
+        double rangeSpan = maxVal - minVal;
+
         oss << "Sensor ID " << sensorId << ":\n";
 
         for (int i = 0; i < jumlahPengukuranPerSensor; ++i)
         {
-            double value = static_cast<double>(rand() % 10000) / 100.0;  // nilai 0.00–99.99
+            double randRaw = static_cast<double>(rand() % 10000); // angka mentah
+            double value = fmod(randRaw, rangeSpan) + minVal;
+
             string result = addMeasurement(sensorId, value);
             oss << "  - " << result << "\n";
         }
@@ -424,6 +595,7 @@ string IoTNetwork::loadRandomMeasurementsToAll(int jumlahPengukuranPerSensor)
     cout << msg << endl;
     return msg;
 }
+
 
 // Fungsi untuk melakukan stress test dengan menambah 1000 sensor
 string IoTNetwork::testCase() {

@@ -7,6 +7,7 @@ debug/displaymeasurement.o
 debug/findsensors.o
 debug/getaverage.o
 debug/removesensor.o
+debug/sortanddisplay.o
 debug/testbawa.o
 debug/undomeasurement.o
 debug/moc_MainWindow.o
@@ -16,5 +17,6 @@ debug/moc_displaymeasurement.o
 debug/moc_findsensors.o
 debug/moc_getaverage.o
 debug/moc_removesensor.o
+debug/moc_sortanddisplay.o
 debug/moc_testbawa.o
 debug/moc_undomeasurement.o

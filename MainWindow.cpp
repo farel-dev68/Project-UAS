@@ -7,6 +7,7 @@
 #include "testbawa.h"
 #include "getaverage.h"
 #include "findsensors.h"
+#include "sortanddisplay.h"
 #include "displaymeasurement.h"
 #include <QMessageBox>
 
@@ -85,8 +86,13 @@ void MainWindow::on_btnFindSensors_clicked()
 // Handler untuk tombol "Sort and Display" - menampilkan sensor yang diurutkan berdasarkan lokasi
 void MainWindow::on_btnSortnDisplay_clicked()
 {
-    std::string result = network.sortAndDisplaySensorsByLocation();
-    ui->textOutput->append(QString::fromStdString(result));
+    SortAndDisplay dialog(this);
+    if (dialog.exec() == QDialog::Accepted) {
+        QString criteria = dialog.getSortBy();
+
+        std::string result = network.sortAndDisplaySensors(criteria.toStdString());
+        ui->textOutput->append(QString::fromStdString(result));
+    }
 }
 
 // Handler untuk tombol "Display Measurement" - menampilkan semua pengukuran untuk sensor tertentu

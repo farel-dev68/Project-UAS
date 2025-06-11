@@ -15,6 +15,7 @@ public:
     string findSensors(const string &location);
     string displaySensors();
     string sortAndDisplaySensorsByLocation();
+    string sortAndDisplaySensors(const string &criteria);
     string undoLastMeasurement(int sensorId);
     string getAverageMeasurement(int sensorId);
     string displayMeasurement(int sensorId);
